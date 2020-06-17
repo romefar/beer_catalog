@@ -1,7 +1,7 @@
 import fetch from '../utils/fetch';
 
 class BeerService {
-  #beerRoute = '/beers?per_page=15';
+  #beerRoute = '/beers?per_page=8';
 
   fetchBeerItems = async () => {
     return await fetch(this.#beerRoute);
