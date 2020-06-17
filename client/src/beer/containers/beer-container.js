@@ -1,29 +1,57 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { fetchBeerItems } from '../../redux/actions/beer-list-actions/beer-list-actions';
+import BeerList from '../components/beer-list';
+import LoadingSpinner from '../../shared/components/ui-elements/loading-spinner';
+import BeerFilterList from '../components/beer-filter-list';
+import debounce from 'lodash.debounce';
+import {
+  ALCOHOL_VOLUME as ALC,
+  INERNATIONAL_BITTERNESS_UNITS as IBU,
+  COLOR_BY_EBC as CBE
+} from '../components/beer-filter-list/beer-filters-types';
 
 class BeerContainer extends Component {
+  state = {
+    filters: {
+      [ALC.NAME]: ALC.MIN_VALUE,
+      [IBU.NAME]: IBU.MIN_VALUE,
+      [CBE.NAME]: CBE.MIN_VALUE
+    },
+    filterVisible: false
+  }
+
   componentDidMount = () => {
     const { fetchBeerItems } = this.props;
     console.log('mounted');
-    // fetchBeerItems();
+    fetchBeerItems();
   }
+
+  onFilterChangeHandler = debounce((key, val) => {
+    this.setState((state) => {
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [key]: val
+
+        }
+      };
+    });
+  }, 100)
 
   render = () => {
     const { items, hasError, isLoading } = this.props;
-    console.log(isLoading);
-    if (isLoading) {
-      return <h1>Loading...</h1>;
-    }
-
-    if (hasError) {
-      return <h1>Error</h1>;
-    }
-    console.log(items);
+    console.log(this.state);
     return (
-      <h1>Hello</h1>
+      <Fragment>
+        <BeerFilterList onChangeCommitted={this.onFilterChangeHandler}/>
+        {isLoading && <LoadingSpinner />}
+        {hasError && <h1>error was occured</h1>}
+        {items.length > 0 && <BeerList items={items } />}
+      </Fragment>
     );
   }
 }
