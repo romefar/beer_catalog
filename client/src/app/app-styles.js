@@ -6,6 +6,12 @@ const styles = {
     '*': {
       boxSizing: 'border-box'
     }
+  },
+  starSVG: {
+    fill: 'red',
+    '& path:first-child': {
+      fill: 'blue'
+    }
   }
 };
 
