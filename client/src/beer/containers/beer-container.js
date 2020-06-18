@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { fetchBeerItems } from '../../redux/actions/beer-list-actions/beer-list-actions';
-import BeerList from '../components/beer-list';
-import LoadingSpinner from '../../shared/components/ui-elements/loading-spinner';
-import BeerFilterList from '../components/beer-filter-list';
+// import BeerFilterList from '../components/beer-filter-list';
+import InfiniteScroll from '../../shared/components/infinite-scroll';
 import debounce from 'lodash.debounce';
+import SearchBar from '../../search/search-bar';
 import {
   ALCOHOL_VOLUME as ALC,
   INERNATIONAL_BITTERNESS_UNITS as IBU,
@@ -23,12 +23,6 @@ class BeerContainer extends Component {
     filterVisible: false
   }
 
-  componentDidMount = () => {
-    const { fetchBeerItems } = this.props;
-    console.log('mounted');
-    fetchBeerItems();
-  }
-
   onFilterChangeHandler = debounce((key, val) => {
     this.setState((state) => {
       return {
@@ -43,23 +37,27 @@ class BeerContainer extends Component {
   }, 100)
 
   render = () => {
-    const { items, hasError, isLoading } = this.props;
-    console.log(this.state);
+    const { items, hasError, isLoading, fetchBeerItems, hasItems } = this.props;
     return (
       <Fragment>
-        <BeerFilterList onChangeCommitted={this.onFilterChangeHandler}/>
-        {isLoading && <LoadingSpinner />}
-        {hasError && <h1>error was occured</h1>}
-        {items.length > 0 && <BeerList items={items } />}
+        <SearchBar />
+        <InfiniteScroll
+          fetchItems={fetchBeerItems}
+          isLoading={isLoading}
+          hasError={hasError}
+          items={items}
+          hasItems={hasItems}
+        />
       </Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ beerList: { items, hasError, isLoading } }) => {
+const mapStateToProps = ({ beerList: { items, hasError, isLoading, hasItems } }) => {
   return {
     items,
     hasError,
+    hasItems,
     isLoading
   };
 };
@@ -73,6 +71,7 @@ const mapDispatchToProps = (dispatch) => {
 BeerContainer.propTypes = {
   items: PropTypes.array.isRequired,
   hasError: PropTypes.object,
+  hasItems: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   fetchBeerItems: PropTypes.func.isRequired
 };
