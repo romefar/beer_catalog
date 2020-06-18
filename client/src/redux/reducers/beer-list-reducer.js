@@ -7,7 +7,8 @@ import {
 const initialState = {
   items: [],
   hasError: null,
-  isLoading: false
+  isLoading: false,
+  hasItems: true
 };
 
 const beerReducer = (state = initialState, action) => {
@@ -21,13 +22,15 @@ const beerReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [...state.items, ...action.payload],
-        isLoading: false
+        isLoading: false,
+        hasItems: !!action.payload.length
       };
     case FETCH_BEER_LIST_FAILURE:
       return {
         items: [],
         isLoading: false,
-        hasEror: action.payload
+        hasEror: action.payload,
+        hasItems: true
       };
     default: {
       return state;
