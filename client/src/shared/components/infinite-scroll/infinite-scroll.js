@@ -14,7 +14,7 @@ class InfiniteScroll extends Component {
 
       if (windowInnerHeight + documentScrollTop === documentOffsetHeight) {
         if (!this.props.isLoading && this.props.hasItems) {
-          this.props.fetchItems();
+          this.props.fetchItems(this.props.options.searchQuery);
         }
       }
       // const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -28,21 +28,22 @@ class InfiniteScroll extends Component {
 
   componentDidMount = () => {
     this.setWindowOnScrollHandler();
-    this.props.fetchItems();
+    this.props.fetchItems(this.props.options.searchQuery);
   }
 
-  // componentDidUpdate = (prevProps) => {
-  //   if (prevProps.query !== this.props.query) {
-  //     this.props.fetchItems();
-  //   }
-  // }
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.options.searchQuery !== this.props.options.searchQuery) {
+      this.props.fetchItems(this.props.options.searchQuery);
+    }
+  }
+
   render = () => {
     const { items, isLoading, hasError, hasItems } = this.props;
     return (
       <Fragment>
         <BeerList items={items}/>
         {isLoading && hasItems && <LoadingSpinner />}
-        {hasError && <MessageBox text='Sorry. Something went wrong.' />}
+        {hasError && <MessageBox text='Something went wrong.' />}
         {!hasItems && <MessageBox text='Sorry. We are out of beer.' />}
       </Fragment>
     );
@@ -54,7 +55,8 @@ InfiniteScroll.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   hasError: PropTypes.oneOf([PropTypes.string, PropTypes.object]),
   hasItems: PropTypes.bool.isRequired,
-  fetchItems: PropTypes.func.isRequired
+  fetchItems: PropTypes.func.isRequired,
+  options: PropTypes.object.isRequired
 };
 
 export default InfiniteScroll;
