@@ -4,8 +4,9 @@ import ResizeController from '../utils/resize-controller';
 class BeerService {
   #beerRoute = '/beers';
   #params = {
-    per_page: 1,
-    page: 27
+    per_page: 12,
+    page: 1,
+    beer_name: null
   }
 
   #defaultImageUrl = 'http://pluspng.com/img-png/beer-bottle-png-hd-a-beer-bottle-beer-bottle-brown-foam-free-png-and-psd-650.jpg';
@@ -17,8 +18,11 @@ class BeerService {
 
   #generateUrl = () => {
     const url = [];
-    for (const [key, value] of Object.entries(this.#params)) {
+    for (let [key, value] of Object.entries(this.#params)) {
       if (value) {
+        if (key === 'beer_name') {
+          key = key.split(' ').join('_');
+        }
         url.push(`${key}=${value}`);
       }
     }
@@ -38,8 +42,16 @@ class BeerService {
     };
   }
 
-  fetchBeerItems = async () => {
+  fetchBeerItems = async (query) => {
     this.#configureRequest();
+    // TODO: FIX PARAMS OPTIONS
+    this.#params.per_page = 12;
+    this.#params.page = 1;
+    if (query) {
+      this.#params.beer_name = query;
+    } else {
+      this.#params.beer_name = null;
+    }
     const url = this.#generateUrl();
     const rawItems = await fetch(`${this.#beerRoute}${url}`);
     const items = this.#replaceEmptyImages(rawItems);
