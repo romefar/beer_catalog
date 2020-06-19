@@ -1,7 +1,8 @@
 import {
   FETCH_BEER_LIST_REQUEST,
   FETCH_BEER_LIST_SUCCESS,
-  FETCH_BEER_LIST_FAILURE
+  FETCH_BEER_LIST_FAILURE,
+  BEER_LIST_CLEARED
 } from '../actions/beer-list-actions/beer-list-actions-types';
 
 const initialState = {
@@ -26,6 +27,13 @@ const beerReducer = (state = initialState, action) => {
         hasItems: !!action.payload.length
       };
     case FETCH_BEER_LIST_FAILURE:
+      return {
+        items: [],
+        isLoading: false,
+        hasEror: action.payload,
+        hasItems: true
+      };
+    case BEER_LIST_CLEARED:
       return {
         items: [],
         isLoading: false,
