@@ -23,6 +23,11 @@ class BeerContainer extends Component {
     filterVisible: false
   }
 
+  fetchItems = (options) => {
+    const { fetchBeerItems } = this.props;
+    fetchBeerItems(options);
+  }
+
   onFilterChangeHandler = debounce((key, val) => {
     this.setState((state) => {
       return {
@@ -37,28 +42,35 @@ class BeerContainer extends Component {
   }, 100)
 
   render = () => {
-    const { items, hasError, isLoading, fetchBeerItems, hasItems } = this.props;
+    const { items, hasError, isLoading, hasItems, searchQuery } = this.props;
     return (
       <Fragment>
         <SearchBar />
         <InfiniteScroll
-          fetchItems={fetchBeerItems}
+          fetchItems={this.fetchItems}
           isLoading={isLoading}
           hasError={hasError}
           items={items}
           hasItems={hasItems}
+          options={
+            { searchQuery }
+          }
         />
       </Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ beerList: { items, hasError, isLoading, hasItems } }) => {
+const mapStateToProps = ({
+  beerList: { items, hasError, isLoading, hasItems },
+  search: { searchQuery }
+}) => {
   return {
     items,
     hasError,
     hasItems,
-    isLoading
+    isLoading,
+    searchQuery
   };
 };
 
@@ -73,7 +85,8 @@ BeerContainer.propTypes = {
   hasError: PropTypes.object,
   hasItems: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  fetchBeerItems: PropTypes.func.isRequired
+  fetchBeerItems: PropTypes.func.isRequired,
+  searchQuery: PropTypes.string
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BeerContainer);
