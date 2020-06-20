@@ -1,6 +1,7 @@
 class ResizeController {
   static getItemsCount = () => {
-    const container = document.querySelector('.BeerList-beerListContainer-0-2-12');
+    // TODO: Fix selectors names or replace with id
+    const container = document.querySelector('.BeerList-beerListContainer-0-2-22');
     const header = document.querySelector('.Header-header-0-2-5');
 
     const containerWidth = container.offsetWidth;
