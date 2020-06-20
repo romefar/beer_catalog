@@ -33,10 +33,10 @@ const beerListCleared = () => {
   };
 };
 
-const fetchBeerItems = (query) => async (dispatch) => {
+const fetchBeerItems = (options) => async (dispatch) => {
   try {
     dispatch(beerItemsRequested());
-    const beerItems = await getBeerService().fetchBeerItems(query);
+    const beerItems = await getBeerService().fetchBeerItems(options);
     dispatch(beerItemsLoaded(beerItems));
   } catch (error) {
     console.log(error);
