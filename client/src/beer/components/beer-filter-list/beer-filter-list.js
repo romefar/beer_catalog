@@ -14,7 +14,7 @@ const BeerFilterList = ({ classes, onChangeCommitted }) => {
   const filters = [ALC, IBU, CBE];
   return (
     <div className={classes.filtersContainer}>
-      <h2>Advanced search options</h2>
+      <h2>Search options</h2>
       {filters.map(filterType => {
         const key = uuidv4();
         return (

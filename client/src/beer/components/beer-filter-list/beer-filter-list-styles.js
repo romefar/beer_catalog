@@ -1,11 +1,10 @@
 const styles = {
   filtersContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '40vw',
-    margin: '20px auto',
+    width: '100%',
+    margin: '0 auto',
     '& h2': {
       fontFamily: 'Helvetica, Arial, sans-serif',
+      margin: '10px 0',
       textAlign: 'center'
     }
   }
