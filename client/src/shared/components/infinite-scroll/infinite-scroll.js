@@ -4,6 +4,7 @@ import BeerList from '../../../beer/components/beer-list';
 import LoadingSpinner from '../ui-elements/loading-spinner';
 import MessageBox from '../ui-elements/message-box';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash.isequal';
 
 class InfiniteScroll extends Component {
   setWindowOnScrollHandler = () => {
@@ -14,7 +15,7 @@ class InfiniteScroll extends Component {
 
       if (windowInnerHeight + documentScrollTop === documentOffsetHeight) {
         if (!this.props.isLoading && this.props.hasItems) {
-          this.props.fetchItems(this.props.options.searchQuery);
+          this.props.fetchItems(this.props.options);
         }
       }
       // const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -28,12 +29,12 @@ class InfiniteScroll extends Component {
 
   componentDidMount = () => {
     this.setWindowOnScrollHandler();
-    this.props.fetchItems(this.props.options.searchQuery);
+    this.props.fetchItems(this.props.options);
   }
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.options.searchQuery !== this.props.options.searchQuery) {
-      this.props.fetchItems(this.props.options.searchQuery);
+    if (!isEqual(prevProps.options, this.props.options)) {
+      this.props.fetchItems(this.props.options);
     }
   }
 
