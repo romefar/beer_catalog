@@ -38,7 +38,6 @@ class SearchBar extends PureComponent {
     const { searchQuery } = this.props;
     e.preventDefault();
     const [, validQuery] = validateSearchQuery(query);
-    console.log(isValid, validQuery, searchQuery);
     if (isValid && validQuery !== searchQuery) {
       this.props.searchQueryChanged(validQuery);
     }
