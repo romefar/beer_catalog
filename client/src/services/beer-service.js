@@ -1,19 +1,39 @@
 import fetch from '../utils/fetch';
 import ResizeController from '../utils/resize-controller';
+import isEqual from 'lodash.isequal';
 
 class BeerService {
   #beerRoute = '/beers';
+  #prevOptions = null;
   #params = {
     per_page: 12,
     page: 1,
-    beer_name: null
+    beer_name: null,
+    abv_gt: null,
+    ibu_gt: null,
+    ebc_gt: null
   }
 
   #defaultImageUrl = 'http://pluspng.com/img-png/beer-bottle-png-hd-a-beer-bottle-beer-bottle-brown-foam-free-png-and-psd-650.jpg';
 
-  #configureRequest = () => {
-    const itemsCount = ResizeController.getItemsCount();
-    this.#params.per_page = itemsCount;
+  #configureRequest = (options) => {
+    const {
+      searchQuery,
+      alcoholVolume,
+      bitternetsUnits,
+      ebcColor
+    } = options;
+    this.#params.per_page = ResizeController.getItemsCount();
+    const isChanged = isEqual(this.#prevOptions, options);
+    this.#params.page = isChanged ? this.#params.page : 1;
+    this.#params = {
+      ...this.#params,
+      beer_name: searchQuery,
+      abv_gt: alcoholVolume,
+      ibu_gt: bitternetsUnits,
+      ebc_gt: ebcColor
+    };
+    this.#prevOptions = options;
   }
 
   #generateUrl = () => {
@@ -42,16 +62,8 @@ class BeerService {
     };
   }
 
-  fetchBeerItems = async (query) => {
-    this.#configureRequest();
-    // TODO: FIX PARAMS OPTIONS
-    this.#params.per_page = 12;
-    this.#params.page = 1;
-    if (query) {
-      this.#params.beer_name = query;
-    } else {
-      this.#params.beer_name = null;
-    }
+  fetchBeerItems = async (options) => {
+    this.#configureRequest(options);
     const url = this.#generateUrl();
     const rawItems = await fetch(`${this.#beerRoute}${url}`);
     const items = this.#replaceEmptyImages(rawItems);
