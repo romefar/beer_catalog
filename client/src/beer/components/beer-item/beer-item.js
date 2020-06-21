@@ -4,8 +4,9 @@ import Card from '../../../shared/components/ui-elements/card';
 import styles from './beer-item-style';
 import withStyles from 'react-jss';
 import Button from '@material-ui/core/Button';
+import { Link as RouterLink } from 'react-router-dom'; 
 
-const BeerItem = ({ classes, imageUrl, name, tagline }) => {
+const BeerItem = ({ id, classes, imageUrl, name, tagline }) => {
   return (
     <Card className={classes.cardContent}>
       <div className={classes.imageContainer}>
@@ -16,7 +17,7 @@ const BeerItem = ({ classes, imageUrl, name, tagline }) => {
         <p className={classes.tagline}>{tagline}</p>
       </div>
       <div className={classes.actions}>
-        <Button>View</Button>
+        <Button component={RouterLink} to={`/beer/${id}`}>View</Button>
         <Button>Add to favourite</Button>
       </div>
     </Card>
@@ -24,6 +25,7 @@ const BeerItem = ({ classes, imageUrl, name, tagline }) => {
 };
 
 BeerItem.propTypes = {
+  id: PropTypes.number.isRequired,
   classes: PropTypes.object.isRequired,
   imageUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
