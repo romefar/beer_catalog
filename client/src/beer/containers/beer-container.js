@@ -15,8 +15,7 @@ class BeerContainer extends Component {
       alcoholVolume: null,
       bitternetsUnits: null,
       ebcColor: null
-    },
-    filterVisible: false
+    }
   }
 
   fetchItems = (options) => {
