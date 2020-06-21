@@ -10,6 +10,7 @@ const BeerList = ({ classes, items }) => {
       {items.map(beerItem => {
         return (
           <BeerItem
+            id={beerItem.id}
             key={beerItem.id}
             imageUrl={beerItem.image_url}
             name={beerItem.name}
