@@ -49,15 +49,15 @@ class BeerService {
     return `?${url.join('&')}`;
   }
 
-  #replaceEmptyImages = (items) => {
-    const fixeditems = items.data.map(item => {
+  #replaceEmptyImages = (beerData) => {
+    const fixeditems = beerData.data.map(item => {
       if (!item.image_url) {
         item.image_url = this.#defaultImageUrl;
       }
       return item;
     });
     return {
-      ...items,
+      ...beerData,
       data: fixeditems
     };
   }
@@ -65,10 +65,17 @@ class BeerService {
   fetchBeerItems = async (options) => {
     this.#configureRequest(options);
     const url = this.#generateUrl();
-    const rawItems = await fetch(`${this.#beerRoute}${url}`);
-    const items = this.#replaceEmptyImages(rawItems);
+    const beerData = await fetch(`${this.#beerRoute}${url}`);
+    const beerItems = this.#replaceEmptyImages(beerData);
     this.#params.page += 1;
-    return items;
+    return beerItems;
+  }
+
+  fetchSingleBeer = async (options) => {
+    const { id } = options;
+    const beerData = await fetch(`${this.#beerRoute}/${id}`);
+    const beerItem = this.#replaceEmptyImages(beerData);
+    return beerItem.data.shift();
   }
 }
 
