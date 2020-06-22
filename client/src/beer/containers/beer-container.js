@@ -33,6 +33,10 @@ class BeerContainer extends Component {
     });
   }
 
+  componentWillUnmount = () => {
+    this.props.beerListCleared();
+  }
+
   onFilterChangeHandler = debounce((key, val) => {
     this.props.beerListCleared();
     this.setState((state) => {
