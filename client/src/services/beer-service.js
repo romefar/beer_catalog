@@ -16,6 +16,10 @@ class BeerService {
 
   #defaultImageUrl = 'http://pluspng.com/img-png/beer-bottle-png-hd-a-beer-bottle-beer-bottle-brown-foam-free-png-and-psd-650.jpg';
 
+  resetPages = () => {
+    this.#params.page = 1;
+  }
+
   #configureRequest = (options) => {
     const {
       searchQuery,
