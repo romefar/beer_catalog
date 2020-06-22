@@ -12,18 +12,18 @@ const styles = theme => ({
     fontFamily: 'Lato, Segoe UI, Verdana, sans-serif',
     '& li': {
       margin: '0 0.5rem'
-    },
-    '& a': {
-      borderBottom: '3px solid transparent',
-      color: theme.linkColor,
-      textDecoration: 'none',
-      padding: '0.5rem',
-      transition: '.4s ease-in'
-    },
-    '& a:hover, a:active': {
+    }
+  },
+  navLinkItem: {
+    borderBottom: '3px solid transparent',
+    color: theme.linkColor,
+    textDecoration: 'none',
+    padding: '0.5rem',
+    transition: '.4s ease-in',
+    '&:hover, &:active': {
       borderBottomColor: 'rgb(0,232,0)'
     },
-    '& a.active': {
+    '&.active': {
       color: 'yellow',
       borderBottomColor: 'yellow'
     }
