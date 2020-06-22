@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import styles from './nav-links-styles';
 import withStyles from 'react-jss';
 import PropTypes from 'prop-types';
@@ -8,20 +8,24 @@ const NavLinks = ({ classes }) => {
   return (
     <ul className={classes.navLinksList}>
       <li>
-        <NavLink to="/asd">Beers</NavLink>
+        <NavLink className={classes.navLinkItem} to="/asd">Beers</NavLink>
       </li>
       <li>
-        <NavLink to="/dd"> Test </NavLink>
+        <NavLink className={classes.navLinkItem} to="/dd"> Test </NavLink>
       </li>
       <li>
-        <button className={classes.authButton}>
-        Sign up
-        </button>
+        <Link to="/signup">
+          <button className={classes.authButton}>
+            Sign up
+          </button>
+        </Link>
       </li>
       <li>
-        <button className={classes.authButton}>
-        Login
-        </button>
+        <Link to="/signin">
+          <button className={classes.authButton}>
+            Login
+          </button>
+        </Link>
       </li>
     </ul>
   );
