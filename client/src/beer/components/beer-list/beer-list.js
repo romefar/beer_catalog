@@ -6,7 +6,7 @@ import styles from './beer-list-style';
 
 const BeerList = ({ classes, items }) => {
   return (
-    <div className={classes.beerListContainer}>
+    <div id="beer_list_container" className={classes.beerListContainer}>
       {items.map(beerItem => {
         return (
           <BeerItem
