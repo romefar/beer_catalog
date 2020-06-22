@@ -28,6 +28,7 @@ const beerItemsLoadingFailed = (error) => {
 };
 
 const beerListCleared = () => {
+  getBeerService().resetPages();
   return {
     type: BEER_LIST_CLEARED
   };
