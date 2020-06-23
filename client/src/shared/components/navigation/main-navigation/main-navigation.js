@@ -6,6 +6,7 @@ import Header from '../header';
 import { MenuIcon } from '../../../../assets';
 import { Link } from 'react-router-dom';
 import NavLinks from '../nav-links';
+import ProfilePanel from '../../../../profile/components/profile-panel';
 
 const MainNavigation = ({ classes }) => {
   return (
@@ -21,6 +22,7 @@ const MainNavigation = ({ classes }) => {
       <nav className={classes.headerNav}>
         <NavLinks />
       </nav>
+      <ProfilePanel />
     </Header>
   );
 };
