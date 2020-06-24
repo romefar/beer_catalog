@@ -2,6 +2,7 @@ const styles = {
   '@global': {
     body: {
       margin: 0
+      // color: '#e9e9e9'
     },
     '*': {
       boxSizing: 'border-box'
