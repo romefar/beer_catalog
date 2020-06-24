@@ -2,8 +2,17 @@ import React, { PureComponent, createRef } from 'react';
 import withStyles from 'react-jss';
 import styles from './settings-dropdown-styles';
 import PropTypes from 'prop-types';
+import SettingsDropdownItem from '../settings-dropdown-item';
+// import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+import NightsStayOutlinedIcon from '@material-ui/icons/NightsStayOutlined';
+import Switch from '@material-ui/core/Switch';
 
 class SettingsDropdown extends PureComponent {
+  state = {
+    themeCheckbox: false
+  }
+
   node = createRef()
 
   componentDidMount = () => {
@@ -21,19 +30,39 @@ class SettingsDropdown extends PureComponent {
     }
   }
 
+  onChangeHandler = (e) => {
+    const name = e.target.name;
+    this.setState(state => {
+      return {
+        [name]: !state[name]
+      };
+    });
+  }
+
   render = () => {
     return (
       <div
         className={this.props.classes.container}
         ref={node => { this.node = node; } }>
-        <p>Test row №1</p>
-        <p>Test row №2</p>
-        <p>Test row №3</p>
-        <p>Test row №4</p>
-        <p>Test row №5</p>
-        <p>Test row №6</p>
-        <p>Test row №7</p>
-        <p>Test row №8</p>
+        <SettingsDropdownItem
+          icon={<SettingsOutlinedIcon />}
+          title="Settings"
+        />
+        <SettingsDropdownItem
+          icon={<SettingsOutlinedIcon />}
+          title="Profile"
+        />
+        <SettingsDropdownItem divider />
+        <SettingsDropdownItem
+          icon={<NightsStayOutlinedIcon />}
+          title="Dark mode"
+          controlElement={
+            <Switch
+              checked={this.state.themeCheckbox}
+              onChange={this.onChangeHandler}
+              name="themeCheckbox"
+              color="primary" />}
+        />
       </div>
     );
   }
@@ -42,7 +71,7 @@ class SettingsDropdown extends PureComponent {
 SettingsDropdown.propTypes = {
   classes: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
-  containerNodeRef: PropTypes.node.isRequired
+  containerNodeRef: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(SettingsDropdown);
