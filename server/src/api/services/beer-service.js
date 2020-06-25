@@ -4,7 +4,6 @@ const HttpError = require('../../error-models/http-error');
 
 class BeerService {
   getBeerItems = async (params) => {
-    let url;
     if (Object.entries(params).length > 0) {
       const isValid = Joi.object({
         page: Joi.number(),
@@ -16,17 +15,22 @@ class BeerService {
       }).validate(params);
 
       if (isValid.error) {
-        throw new HttpError('Invalid URL parameters.', 422);
-      }
-      console.log(params);
-
-      url = '?';
-      for (const [key, value] of Object.entries(params)) {
-        url += `${key}=${value}`;
+        throw new HttpError('Invalid URL parameters.', 400);
       }
     }
-    const items = await beerRepository.getAll(url);
-    return items.data;
+    return await beerRepository.getAll(params);
+  }
+
+  getBeerItem = async (params) => {
+    const isValid = Joi.object({
+      id: Joi.number()
+    }).validate(params);
+
+    if (isValid.error) {
+      throw new HttpError('Cannot find route.', 404);
+    }
+
+    return await beerRepository.getById(params.id);
   }
 }
 
