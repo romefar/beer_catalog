@@ -1,10 +1,12 @@
 const fetch = require('../../utlis/fetch');
 
 class BeerRepository {
-  #rootUrl = 'https://api.punkapi.com/v2';
+  getAll = async (params) => {
+    return await fetch('/beers', 'GET', null, params);
+  }
 
-  getAll = async (urlQuery = '?page=1&per_page=3') => {
-    return await fetch(`${this.#rootUrl}/beers${urlQuery}`);
+  getById = async (id) => {
+    return await fetch(`/beers/${id}`);
   }
 }
 
