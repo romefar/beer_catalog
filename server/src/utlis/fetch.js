@@ -1,5 +1,12 @@
-const axios = require('axios');
+const axios = require('./fetch-config');
 
-module.exports = async (url) => {
-  return await axios(url);
+module.exports = async (url, method = 'GET', body = {}, params = {}, headers = {}, options = {}) => {
+  const items = await axios({
+    url,
+    method,
+    data: body,
+    params,
+    headers
+  });
+  return items.data;
 };
