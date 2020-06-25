@@ -9,6 +9,15 @@ class BeerController {
       next(error);
     }
   }
+
+  getBeerItem = async (req, res, next) => {
+    try {
+      const beerItem = await beerService.getBeerItem(req.params);
+      res.send(beerItem);
+    } catch (error) {
+      next(error);
+    };
+  }
 }
 
 module.exports = new BeerController();
