@@ -1,23 +1,26 @@
+import getAuthService from '../../../services/auth-service';
 import {
   SIGNUP_SUCCESS,
-  SIGNUP_FAILURE,
-  SIGNUP_SUBMIT
+  SIGNUP_FAILURE
 } from './sign-up-actions-types';
 
-const signupSubmit = () => {
-  return {
-    type: SIGNUP_SUBMIT
-  };
+const signUpSubmit = (formData) => async (dispatch) => {
+  try {
+    const authData = await getAuthService().signUp(formData);
+    dispatch(signUpSuccess(authData));
+  } catch (error) {
+    dispatch(signUpFailed(error));
+  }
 };
 
-const signupSuccess = (data) => {
+const signUpSuccess = (data) => {
   return {
     type: SIGNUP_SUCCESS,
     payload: data
   };
 };
 
-const signupFailed = (error) => {
+const signUpFailed = (error) => {
   return {
     type: SIGNUP_FAILURE,
     payload: error
@@ -25,7 +28,5 @@ const signupFailed = (error) => {
 };
 
 export {
-  signupSubmit,
-  signupSuccess,
-  signupFailed
+  signUpSubmit
 };
