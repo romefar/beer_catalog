@@ -14,7 +14,7 @@ class SignIn extends Component {
       email: {
         elementType: 'input',
         config: {
-          type: 'text',
+          type: 'email',
           placeholder: 'Email address'
         },
         preValidators: [],
@@ -49,8 +49,11 @@ class SignIn extends Component {
   onSubmitHandler = (e) => {
     e.preventDefault();
     if (this.state.isFormValid) {
-      // do http requests to sign in a user
-      console.log('All nice');
+      const formData = {
+        email: this.state.formData.email.value,
+        password: this.state.formData.password.value
+      };
+      this.props.onSubmit(formData, this.props.history);
     }
   }
 
@@ -79,7 +82,7 @@ class SignIn extends Component {
   }
 
   render = () => {
-    const { classes } = this.props;
+    const { classes, hasError } = this.props;
     const formElements = [];
     for (const [key, data] of Object.entries(this.state.formData)) {
       formElements.push({
@@ -112,6 +115,9 @@ class SignIn extends Component {
               />
             );
           })}
+          {hasError && <div className={classes.errorMessage}>
+            {hasError.message}
+          </div>}
           <Button
             variant="contained"
             color="primary"
@@ -134,7 +140,11 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  hasError: PropTypes.object,
+  isLoggedIn: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(SignIn);

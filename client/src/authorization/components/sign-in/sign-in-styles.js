@@ -16,6 +16,13 @@ const styles = {
     textAlign: 'center',
     margin: '10px 0'
   },
+  errorMessage: {
+    textAlign: 'center',
+    borderRadius: '10px',
+    backgroundColor: '#DC143C',
+    padding: '10px',
+    margin: '15px 0'
+  },
   submitButton: {
     width: '100%'
   },
