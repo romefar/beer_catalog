@@ -50,7 +50,7 @@ class BeerContainer extends Component {
   }, 100)
 
   render = () => {
-    const { items, hasError, isLoading, hasItems, searchQuery } = this.props;
+    const { items, hasError, isLoading, isLoggedIn, hasItems, searchQuery } = this.props;
     const options = {
       searchQuery,
       ...this.state.filters
@@ -65,6 +65,7 @@ class BeerContainer extends Component {
           fetchItems={this.fetchItems}
           isLoading={isLoading}
           hasError={hasError}
+          isLoggedIn={isLoggedIn}
           items={items}
           hasItems={hasItems}
           options={options}
@@ -76,11 +77,13 @@ class BeerContainer extends Component {
 
 const mapStateToProps = ({
   beerList: { items, hasError, isLoading, hasItems },
+  signIn: { isLoggedIn },
   search: { searchQuery }
 }) => {
   return {
     items,
     hasError,
+    isLoggedIn,
     hasItems,
     isLoading,
     searchQuery
@@ -101,6 +104,7 @@ BeerContainer.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   fetchBeerItems: PropTypes.func.isRequired,
   beerListCleared: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
   searchQuery: PropTypes.string
 };
 
