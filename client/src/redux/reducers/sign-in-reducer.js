@@ -1,7 +1,6 @@
 import {
   SIGNIN_SUCCESS,
   SIGNIN_FAILURE,
-  SIGNIN_SUBMIT,
   LOGOUT
 } from '../actions/sign-in-actions/sign-in-actions-types';
 
@@ -13,8 +12,6 @@ const initialState = {
 
 const signInReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SIGNIN_SUBMIT:
-      return state;
     case SIGNIN_SUCCESS:
       return {
         isLoggedIn: true,

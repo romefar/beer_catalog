@@ -1,22 +1,19 @@
 import {
   SIGNUP_SUCCESS,
-  SIGNUP_FAILURE,
-  SIGNUP_SUBMIT
+  SIGNUP_FAILURE
 } from '../actions/sign-up-actions/sign-up-actions-types';
 
 const initialState = {
-  isLoggedIn: false,
+  isRegistered: false,
   hasError: null,
   userData: null
 };
 
 const signUpReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SIGNUP_SUBMIT:
-      return state;
     case SIGNUP_SUCCESS:
       return {
-        isLoggedIn: true,
+        isRegistered: true,
         hasError: null,
         userData: action.payload
       };
