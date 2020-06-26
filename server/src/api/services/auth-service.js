@@ -16,7 +16,7 @@ class AuthService {
 
   signIn = async (data) => {
     const isValid = Joi.object({
-      email: Joi.email().required(),
+      email: Joi.string().email().required(),
       password: Joi.string().required()
     }).validate(data);
 
@@ -26,7 +26,7 @@ class AuthService {
 
     const { email, password } = data;
 
-    const user = this.repository.getOneByCriteria({ email });
+    const user = await this.repository.getOneByCriteria({ email });
     if (!user) {
       throw new HttpError('Invalid email or password.', 404);
     }
@@ -40,6 +40,8 @@ class AuthService {
 
     return {
       userId: user.id,
+      userName: user.name,
+      image: user.image,
       token
     };
   };
@@ -47,7 +49,7 @@ class AuthService {
   signUp = async (data) => {
     const isValid = Joi.object({
       name: Joi.string().required(),
-      email: Joi.email().required(),
+      email: Joi.string().email().required(),
       password: Joi.string().min(8).required()
     }).validate(data);
 
