@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path')
+const path = require('path');
 const dbConnect = require('./db/connection/mongoose');
 const beerRoute = require('./api/controllers/beer-controller/routes');
 const authRoute = require('./api/controllers/auth-controller/routes');
