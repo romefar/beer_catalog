@@ -23,7 +23,7 @@ class ProfilePanel extends PureComponent {
   }
 
   render = () => {
-    const { classes } = this.props;
+    const { classes, userData, logout } = this.props;
     const { isDropdownVisible } = this.state;
     return (
       <Fragment>
@@ -34,22 +34,24 @@ class ProfilePanel extends PureComponent {
               [classes.expandIcon]: true,
               [classes.expandIconOpened]: isDropdownVisible
             })}/>
-          <span className={classes.userName}>{'UserName'}</span>
+          <span className={classes.userName}>{userData.userName}</span>
           <div className={classes.profileImage}>
             <Avatar
-              imageUrl="https://www.pinclipart.com/picdir/big/60-602450_profile-clipart-profile-icon-round-profile-pic-png.png"
+              imageUrl={`http://localhost:5000/${userData.image}`}
               alt="title"
             />
           </div>
         </div>
-        {isDropdownVisible && <SettingsDropdown containerNodeRef={this.containerNodeRef} onClick={this.onClickHandler}/>}
+        {isDropdownVisible && <SettingsDropdown logout={logout} containerNodeRef={this.containerNodeRef} onClick={this.onClickHandler}/>}
       </Fragment>
     );
   }
 }
 
 ProfilePanel.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  userData: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(ProfilePanel);

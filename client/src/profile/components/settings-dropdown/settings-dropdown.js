@@ -3,7 +3,7 @@ import withStyles from 'react-jss';
 import styles from './settings-dropdown-styles';
 import PropTypes from 'prop-types';
 import SettingsDropdownItem from '../settings-dropdown-item';
-// import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import NightsStayOutlinedIcon from '@material-ui/icons/NightsStayOutlined';
 import Switch from '@material-ui/core/Switch';
@@ -63,6 +63,11 @@ class SettingsDropdown extends PureComponent {
               name="themeCheckbox"
               color="primary" />}
         />
+        <SettingsDropdownItem
+          icon={<ExitToAppOutlinedIcon />}
+          title="Logout"
+          onClick={this.props.logout}
+        />
       </div>
     );
   }
@@ -71,7 +76,8 @@ class SettingsDropdown extends PureComponent {
 SettingsDropdown.propTypes = {
   classes: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
-  containerNodeRef: PropTypes.object.isRequired
+  containerNodeRef: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SettingsDropdown);

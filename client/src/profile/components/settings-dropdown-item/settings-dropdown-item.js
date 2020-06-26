@@ -4,9 +4,9 @@ import styles from './settings-dropdown-item-styles';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const SettingsDropdownItem = ({ classes, icon, title, to, controlElement, divider }) => {
+const SettingsDropdownItem = ({ classes, icon, title, to, controlElement, divider, onClick }) => {
   const content = (
-    <div className={classes.container}>
+    <div className={classes.container} onClick={onClick}>
       <div className={classes.titleContainer}>
         <div className={classes.iconContainer}>
           {icon}
@@ -38,6 +38,7 @@ SettingsDropdownItem.propTypes = {
   to: PropTypes.string,
   icon: PropTypes.object,
   controlElement: PropTypes.object,
+  onClick: PropTypes.func
 };
 
 export default withStyles(styles)(SettingsDropdownItem);
