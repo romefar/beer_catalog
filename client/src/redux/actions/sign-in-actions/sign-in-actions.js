@@ -1,24 +1,30 @@
+import getAuthService from '../../../services/auth-service';
 import {
   SIGNIN_SUCCESS,
   SIGNIN_FAILURE,
-  SIGNIN_SUBMIT,
   LOGOUT
 } from './sign-in-actions-types';
 
-const loginSubmit = () => {
-  return {
-    type: SIGNIN_SUBMIT
-  };
+const signInSubmit = (formData, history) => async (dispatch) => {
+  try {
+    const authData = await getAuthService().signIn(formData);
+    dispatch(signInSuccess(authData, history));
+  } catch (error) {
+    dispatch(signInFailed(error));
+  }
 };
 
-const loginSuccess = (authData) => {
+const signInSuccess = (authData, history) => {
+  if (history) {
+    history.push('/');
+  }
   return {
     type: SIGNIN_SUCCESS,
     payload: authData
   };
 };
 
-const loginFailed = (error) => {
+const signInFailed = (error) => {
   return {
     type: SIGNIN_FAILURE,
     payload: error
@@ -26,14 +32,14 @@ const loginFailed = (error) => {
 };
 
 const logout = () => {
+  getAuthService().clearAuthData();
   return {
     type: LOGOUT
   };
 };
 
 export {
-  loginSubmit,
-  loginSuccess,
-  loginFailed,
+  signInSubmit,
+  signInSuccess,
   logout
 };
