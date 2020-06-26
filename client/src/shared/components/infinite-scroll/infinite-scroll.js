@@ -39,10 +39,10 @@ class InfiniteScroll extends Component {
   }
 
   render = () => {
-    const { items, isLoading, hasError, hasItems } = this.props;
+    const { items, isLoading, isLoggedIn, hasError, hasItems } = this.props;
     return (
       <Fragment>
-        <BeerList items={items}/>
+        <BeerList items={items} isLoggedIn={isLoggedIn} />
         {isLoading && hasItems && <LoadingSpinner />}
         {hasError && <MessageBox text='Something went wrong.' />}
         {!hasItems && <MessageBox text='Sorry. We are out of beer.' />}
@@ -56,6 +56,7 @@ InfiniteScroll.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   hasError: PropTypes.oneOf([PropTypes.string, PropTypes.object]),
   hasItems: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
   fetchItems: PropTypes.func.isRequired,
   options: PropTypes.object.isRequired
 };
