@@ -54,14 +54,13 @@ class BeerService {
   }
 
   #replaceEmptyImages = (beerData) => {
-    const fixeditems = beerData.data.map(item => {
+    const fixeditems = beerData.map(item => {
       if (!item.image_url) {
         item.image_url = this.#defaultImageUrl;
       }
       return item;
     });
     return {
-      ...beerData,
       data: fixeditems
     };
   }
