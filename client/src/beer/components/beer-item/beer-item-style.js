@@ -27,6 +27,8 @@ const styles = {
   },
   actions: {
     borderTop: '1px solid #ccc',
+    display: 'flex',
+    justifyContent: 'space-evenly',
     padding: '5px 0 0 0'
   },
   cardContent: {
