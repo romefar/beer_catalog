@@ -68,10 +68,21 @@ class SignUp extends Component {
     isFormValid: false
   }
 
+  componentDidUpdate = () => {
+    if (this.props.isRegistered) {
+      this.props.history.push('/signin');
+    }
+  }
+
   onSubmitHandler = (e) => {
     e.preventDefault();
     if (this.state.isFormValid) {
-      // do http requests to sign up a user
+      const formData = {
+        name: this.state.formData.name.value,
+        email: this.state.formData.email.value,
+        password: this.state.formData.password.value
+      };
+      this.props.onSubmit(formData);
     }
   }
 
@@ -100,7 +111,7 @@ class SignUp extends Component {
   }
 
   render = () => {
-    const { classes } = this.props;
+    const { classes, hasError } = this.props;
     const formElements = [];
     for (const [key, data] of Object.entries(this.state.formData)) {
       formElements.push({
@@ -135,6 +146,9 @@ class SignUp extends Component {
             );
           })}
           <p className={classes.tips}>Your password must be at least 8 characters long and cannot contain word &quot;password&quot;.</p>
+          {hasError && <div className={classes.errorMessage}>
+            {hasError.message}
+          </div>}
           <Button
             variant="contained"
             color="primary"
@@ -157,7 +171,11 @@ class SignUp extends Component {
 }
 
 SignUp.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  hasError: PropTypes.object,
+  isRegistered: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(SignUp);
