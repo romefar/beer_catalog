@@ -42,7 +42,12 @@ class ProfilePanel extends PureComponent {
             />
           </div>
         </div>
-        {isDropdownVisible && <SettingsDropdown logout={logout} containerNodeRef={this.containerNodeRef} onClick={this.onClickHandler}/>}
+        {isDropdownVisible &&
+        <SettingsDropdown
+          logout={logout}
+          containerNodeRef={this.containerNodeRef}
+          onClick={this.onClickHandler}
+        />}
       </Fragment>
     );
   }
