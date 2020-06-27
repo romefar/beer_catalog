@@ -10,36 +10,33 @@ import BeerDetailsContainer from '../beer/containers/beer-details-container';
 import SignUpContainer from '../authorization/containers/sign-up-container';
 import SignInContainer from '../authorization/containers/sign-in-container';
 import { logout, signInSuccess } from '../redux/actions/sign-in-actions/sign-in-actions';
+import { fetchBeerFavourites } from '../redux/actions/profile-actions/profile-actions';
 import PropTypes from 'prop-types';
+import getAuthService from '../services/auth-service';
+
 const theme = {
   linkColor: 'white'
 };
 
-let timerId;
-
 class App extends Component {
-  #logoutTokenHandler = (expiration, logout) => {
-    timerId = setTimeout(logout, expiration.getTime() - new Date().getTime());
-  }
-
-  componentDidUpdate = (prevProps) => {
-    if (this.props.isLoggedIn && !timerId) {
-      timerId = this.#logoutTokenHandler(this.props.userData.expiration, this.props.logout);
+  componentDidUpdate = () => {
+    const isTimerSettled = getAuthService().isTimerSettled();
+    if (this.props.isLoggedIn && !isTimerSettled) {
+      console.log(`Timer : ${isTimerSettled} && IsLoggedIn ${this.props.isLoggedIn}`);
+      getAuthService().setLogoutTimer(this.props.userData.expiration, this.props.logout);
+      this.props.fetchBeerFavourites();
     }
   }
 
   componentDidMount = () => {
-    const storedData = JSON.parse(localStorage.getItem('AUTH_TOKEN'));
-    if (storedData && new Date(storedData.expiration > new Date())) {
-      this.props.signInSuccess({
-        ...storedData,
-        expiration: new Date(storedData.expiration)
-      });
+    getAuthService().checkSignIn(this.props.signInSuccess);
+    if (this.props.isLoggedIn) {
+      this.props.fetchBeerFavourites();
     }
   }
 
   componentWillUnmount = () => {
-    clearTimeout(timerId);
+    getAuthService().clearLogoutTimer();
   }
 
   render = () => {
@@ -70,7 +67,8 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     logout,
-    signInSuccess
+    signInSuccess,
+    fetchBeerFavourites
   }, dispatch);
 };
 
@@ -78,7 +76,8 @@ App.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   userData: PropTypes.object,
   logout: PropTypes.func.isRequired,
-  signInSuccess: PropTypes.func.isRequired
+  signInSuccess: PropTypes.func.isRequired,
+  fetchBeerFavourites: PropTypes.func.isRequired
 };
 
 export default compose(
