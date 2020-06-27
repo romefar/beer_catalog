@@ -4,6 +4,8 @@ const path = require('path');
 const dbConnect = require('./db/connection/mongoose');
 const beerRoute = require('./api/controllers/beer-controller/routes');
 const authRoute = require('./api/controllers/auth-controller/routes');
+const profileRoute = require('./api/controllers/profile-controller/routes');
+const auth = require('./middlewares/auth');
 const app = express();
 
 app.use(express.json());
@@ -15,6 +17,7 @@ app.use(cors({
 
 app.use('/beers', beerRoute);
 app.use(authRoute);
+app.use('/profile', auth, profileRoute);
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {
