@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { fetchBeerItems, beerListCleared } from '../../redux/actions/beer-list-actions/beer-list-actions';
+import { addBeerToFavourites, removeBeerFromFavourites } from '../../redux/actions/profile-actions/profile-actions';
 import BeerFilterList from '../components/beer-filter-list';
 import InfiniteScroll from '../../shared/components/infinite-scroll';
 import debounce from 'lodash.debounce';
@@ -15,6 +16,14 @@ class BeerContainer extends Component {
       alcoholVolume: null,
       bitternetsUnits: null,
       ebcColor: null
+    }
+  }
+
+  toggleFavourites = (id) => {
+    if (this.props.favourites.map(item => item.beerId).includes(id)) {
+      this.props.removeBeerFromFavourites(id);
+    } else {
+      this.props.addBeerToFavourites(id);
     }
   }
 
@@ -50,7 +59,7 @@ class BeerContainer extends Component {
   }, 100)
 
   render = () => {
-    const { items, hasError, isLoading, isLoggedIn, hasItems, searchQuery } = this.props;
+    const { items, hasError, isLoading, isLoggedIn, hasItems, searchQuery, favourites } = this.props;
     const options = {
       searchQuery,
       ...this.state.filters
@@ -65,6 +74,8 @@ class BeerContainer extends Component {
           fetchItems={this.fetchItems}
           isLoading={isLoading}
           hasError={hasError}
+          favourites={favourites}
+          onFavouriteClick={this.toggleFavourites}
           isLoggedIn={isLoggedIn}
           items={items}
           hasItems={hasItems}
@@ -78,12 +89,14 @@ class BeerContainer extends Component {
 const mapStateToProps = ({
   beerList: { items, hasError, isLoading, hasItems },
   signIn: { isLoggedIn },
+  profile: { favourites },
   search: { searchQuery }
 }) => {
   return {
     items,
     hasError,
     isLoggedIn,
+    favourites,
     hasItems,
     isLoading,
     searchQuery
@@ -93,6 +106,8 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     fetchBeerItems,
+    addBeerToFavourites,
+    removeBeerFromFavourites,
     beerListCleared
   }, dispatch);
 };
@@ -102,7 +117,10 @@ BeerContainer.propTypes = {
   hasError: PropTypes.object,
   hasItems: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  favourites: PropTypes.array.isRequired,
   fetchBeerItems: PropTypes.func.isRequired,
+  removeBeerFromFavourites: PropTypes.func.isRequired,
+  addBeerToFavourites: PropTypes.func.isRequired,
   beerListCleared: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   searchQuery: PropTypes.string
