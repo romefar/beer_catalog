@@ -12,6 +12,37 @@ class ProfileController {
       next(error);
     }
   }
+
+  getBeerFavouritesList = async (req, res, next) => {
+    try {
+      const user = await profileService.getBeerFavouritesList(req.userId);
+      res.send(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  removeBeerFromFavourites = async (req, res, next) => {
+    try {
+      const user = await profileService.removeBeerFromFavourites({
+        ...req.params, userId: req.userId
+      });
+      res.send(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  addBeerToFavourites = async (req, res, next) => {
+    try {
+      const user = await profileService.addBeerToFavourites({
+        ...req.params, userId: req.userId
+      });
+      res.send(user);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = new ProfileController();
