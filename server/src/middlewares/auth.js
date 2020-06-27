@@ -1,6 +1,6 @@
 const HttpError = require('../error-models/http-error');
 const jwt = require('jsonwebtoken');
-const usersRepository = require('../api/data-access-layer/users-repository');
+const usersRepository = require('../api/data-access-layer/profile-repository');
 require('dotenv/config');
 
 const AUHT_FAILED_MSG = 'Authentication failed.';
@@ -22,6 +22,7 @@ module.exports = async (req, res, next) => {
     if (!user) {
       throw new Error(AUHT_FAILED_MSG);
     }
+    req.userId = decodedUserData.userId;
     next();
   } catch (error) {
     return next(new HttpError(error.message, 403));
