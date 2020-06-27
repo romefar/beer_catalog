@@ -3,6 +3,10 @@ const Joi = require('@hapi/joi');
 const HttpError = require('../../error-models/http-error');
 
 class BeerService {
+  constructor () {
+    this.repository = beerRepository;
+  }
+
   getBeerItems = async (params) => {
     if (Object.entries(params).length > 0) {
       const isValid = Joi.object({
@@ -18,7 +22,7 @@ class BeerService {
         throw new HttpError('Invalid URL parameters.', 400);
       }
     }
-    return await beerRepository.getAll(params);
+    return await this.repository.getAll(params);
   }
 
   getBeerItem = async (params) => {
@@ -30,7 +34,7 @@ class BeerService {
       throw new HttpError('Cannot find route.', 404);
     }
 
-    return await beerRepository.getById(params.id);
+    return await this.repository.getById(params.id);
   }
 }
 
