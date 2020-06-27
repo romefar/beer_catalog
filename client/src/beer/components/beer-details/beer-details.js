@@ -11,10 +11,12 @@ import { v4 as uuidv4 } from 'uuid';
 import parseIngredients from '../../../utils/parseIngredients';
 import parseBrewMethods from '../../../utils/parseBrewMethods';
 import BeerBrewItem from '../beer-brew-item';
+import { isFavourite } from '../../../utils/isBeerFavourite';
 
 const BeerDescription = (props) => {
-  const { classes } = props;
+  const { classes, isLoggedIn, isFavourite, onClick } = props;
   const {
+    id,
     name,
     tagline,
     description,
@@ -51,7 +53,15 @@ const BeerDescription = (props) => {
         <div className={classes.beerDescriptionSection}>
           <h1>{name}</h1>
           <p className={classes.tagline}>{tagline}</p>
-          <Button variant="contained" color="primary" >Add to favourite</Button>
+
+          {isLoggedIn &&
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => onClick(id)}>
+            {isFavourite ? 'Remove from favourite' : 'Add to favourite'}
+          </Button>}
+
           <p className={classes.description}>{description}</p>
         </div>
         <div className={classes.image}>
@@ -74,11 +84,15 @@ const BeerDescription = (props) => {
 
 BeerDescription.propTypes = {
   item: PropTypes.object,
-  classes: PropTypes.object.isRequired
+  isFavourite: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired
 };
 
 const BeerDetails = (props) => {
-  const { classes, isLoading, hasError, item } = props;
+  const { classes, isLoading, isLoggedIn, hasError, item, favourites, onClick } = props;
+
   return (
     <Fragment>
       {isLoading && <LoadingSpinner />}
@@ -87,6 +101,9 @@ const BeerDetails = (props) => {
       <BeerDescription
         classes={classes}
         item={item}
+        isLoggedIn={isLoggedIn}
+        isFavourite={isFavourite(item.id, favourites)}
+        onClick={onClick}
       />}
     </Fragment>
   );
@@ -94,7 +111,10 @@ const BeerDetails = (props) => {
 
 BeerDetails.propTypes = {
   isLoading: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
   item: PropTypes.object,
+  favourites: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired,
   hasError: PropTypes.object,
   classes: PropTypes.object.isRequired
 };
