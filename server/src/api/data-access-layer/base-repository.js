@@ -28,7 +28,7 @@ class BaseRepository {
   }
 
   update = async (conditionObject, updateObject) => {
-    return await this.model.findOneAndUpdate(conditionObject, updateObject);
+    return await this.model.findOneAndUpdate(conditionObject, updateObject, { new: true });
   }
 }
 
