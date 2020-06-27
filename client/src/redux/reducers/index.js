@@ -4,10 +4,12 @@ import searchReducer from './search-reducer';
 import beerItemReducer from './beer-item-reducer';
 import signInReducer from './sign-in-reducer';
 import signUpReducer from './sign-up-reducer';
+import profileReducer from './profile-reducer';
 
 export default combineReducers({
   beerList: beerReducer,
   beerDetails: beerItemReducer,
+  profile: profileReducer,
   search: searchReducer,
   signIn: signInReducer,
   signUp: signUpReducer
