@@ -32,6 +32,7 @@ const signInFailed = (error) => {
 };
 
 const logout = () => {
+  getAuthService().clearLogoutTimer();
   getAuthService().clearAuthData();
   return {
     type: LOGOUT
