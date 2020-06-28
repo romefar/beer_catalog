@@ -10,9 +10,14 @@ const NavLinks = ({ classes, isLoggedIn }) => {
       <li>
         <NavLink className={classes.navLinkItem} to="/asd">Beers</NavLink>
       </li>
-      <li>
-        <NavLink className={classes.navLinkItem} to="/dd"> Test </NavLink>
-      </li>
+      {isLoggedIn && <li>
+        <NavLink
+          className={classes.navLinkItem}
+          to="/beer/favourites"
+        >
+          Favourites
+        </NavLink>
+      </li>}
       {!isLoggedIn && <li>
         <Link to="/signup">
           <button className={classes.authButton}>
