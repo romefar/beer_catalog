@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const controller = require('./controller');
+const auth = require('../../../middlewares/auth');
 
 module.exports = Router()
   .get('/', controller.getBeerItems)
-  .get('/:id', controller.getBeerItem);
+  .get('/:id(\\d+)', controller.getBeerItem)
+  .get('/favourites', auth, controller.getBeerFavouritesItems);
