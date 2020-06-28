@@ -20,6 +20,7 @@
     "mongoose": "^5.9.20",
     "mongoose-unique-validator": "^2.0.3",
     "multer": "^1.4.2",
+    "socket.io": "^2.3.0",
     "uuid": "^8.2.0"
   },
   "devDependencies": {
