@@ -74,6 +74,10 @@ class SignUp extends Component {
     }
   }
 
+  componentWillUnmount = () => {
+    this.props.signUpReset();
+  }
+
   onSubmitHandler = (e) => {
     e.preventDefault();
     if (this.state.isFormValid) {
@@ -173,6 +177,7 @@ class SignUp extends Component {
 SignUp.propTypes = {
   classes: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  signUpReset: PropTypes.func.isRequired,
   hasError: PropTypes.object,
   isRegistered: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired
