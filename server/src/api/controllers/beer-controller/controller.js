@@ -10,6 +10,18 @@ class BeerController {
     }
   }
 
+  getBeerFavouritesItems = async (req, res, next) => {
+    try {
+      const beerItems = await beerService.getBeerFavouritesItems({
+        userId: req.userId,
+        ...req.query
+      });
+      res.send(beerItems);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   getBeerItem = async (req, res, next) => {
     try {
       const beerItem = await beerService.getBeerItem(req.params);
