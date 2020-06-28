@@ -1,14 +1,14 @@
 import getProfileService from '../../../services/profile-service';
 import {
-  ADD_BEER_TO_FAVOURITES_SUCCESS,
-  ADD_BEER_TO_FAVOURITES_FAILURE,
-  REMOVE_BEER_FROM_FAVOURITES_SUCCESS,
-  REMOVE_BEER_FROM_FAVOURITES_FAILURE,
-  FETCH_BEER_LIST_FAVOURITES_SUCCESS,
-  FETCH_BEER_LIST_FAVOURITES_FAILURE
+  ADD_BEER_ID_TO_FAVOURITES_SUCCESS,
+  ADD_BEER_ID_TO_FAVOURITES_FAILURE,
+  REMOVE_BEER_ID_FROM_FAVOURITES_SUCCESS,
+  REMOVE_BEER_ID_FROM_FAVOURITES_FAILURE,
+  FETCH_BEER_IDS_LIST_FAVOURITES_SUCCESS,
+  FETCH_BEER_IDS_LIST_FAVOURITES_FAILURE
 } from './profile-actions-types';
 
-const fetchBeerFavourites = () => async (dispatch) => {
+const fetchBeerFavouritesIds = () => async (dispatch) => {
   try {
     const userData = await getProfileService().getBeerFavouritesList();
     dispatch(fetchBeerFavouritesSuccess(userData.favourites));
@@ -19,14 +19,14 @@ const fetchBeerFavourites = () => async (dispatch) => {
 
 const fetchBeerFavouritesSuccess = (favourites) => {
   return {
-    type: FETCH_BEER_LIST_FAVOURITES_SUCCESS,
+    type: FETCH_BEER_IDS_LIST_FAVOURITES_SUCCESS,
     payload: [...favourites]
   };
 };
 
 const fetchBeerFavouritesFailure = (error) => {
   return {
-    type: FETCH_BEER_LIST_FAVOURITES_FAILURE,
+    type: FETCH_BEER_IDS_LIST_FAVOURITES_FAILURE,
     payload: { ...error }
   };
 };
@@ -42,14 +42,14 @@ const addBeerToFavourites = (id) => async (dispatch) => {
 
 const addBeerToFavouritesSuccess = (userData) => {
   return {
-    type: ADD_BEER_TO_FAVOURITES_SUCCESS,
+    type: ADD_BEER_ID_TO_FAVOURITES_SUCCESS,
     payload: [...userData]
   };
 };
 
 const addBeerToFavouritesFailure = (error) => {
   return {
-    type: ADD_BEER_TO_FAVOURITES_FAILURE,
+    type: ADD_BEER_ID_TO_FAVOURITES_FAILURE,
     payload: { ...error }
   };
 };
@@ -65,14 +65,14 @@ const removeBeerFromFavourites = (id) => async (dispatch) => {
 
 const removeBeerFromFavouritesSuccess = (userData) => {
   return {
-    type: REMOVE_BEER_FROM_FAVOURITES_SUCCESS,
+    type: REMOVE_BEER_ID_FROM_FAVOURITES_SUCCESS,
     payload: [...userData]
   };
 };
 
 const removeBeerFromFavouritesFailure = (error) => {
   return {
-    type: REMOVE_BEER_FROM_FAVOURITES_FAILURE,
+    type: REMOVE_BEER_ID_FROM_FAVOURITES_FAILURE,
     payload: { ...error }
   };
 };
@@ -80,5 +80,5 @@ const removeBeerFromFavouritesFailure = (error) => {
 export {
   addBeerToFavourites,
   removeBeerFromFavourites,
-  fetchBeerFavourites
+  fetchBeerFavouritesIds
 };
