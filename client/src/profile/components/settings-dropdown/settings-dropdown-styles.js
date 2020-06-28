@@ -2,6 +2,7 @@ const styles = {
   container: {
     width: '200px',
     position: 'absolute',
+    zIndex: '100',
     background: '#f9f9f9',
     top: '70px',
     right: '5px',
