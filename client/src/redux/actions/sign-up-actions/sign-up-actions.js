@@ -1,7 +1,8 @@
 import getAuthService from '../../../services/auth-service';
 import {
   SIGNUP_SUCCESS,
-  SIGNUP_FAILURE
+  SIGNUP_FAILURE,
+  SIGNUP_RESET
 } from './sign-up-actions-types';
 
 const signUpSubmit = (formData) => async (dispatch) => {
@@ -20,6 +21,12 @@ const signUpSuccess = (data) => {
   };
 };
 
+const signUpReset = () => {
+  return {
+    type: SIGNUP_RESET
+  };
+};
+
 const signUpFailed = (error) => {
   return {
     type: SIGNUP_FAILURE,
@@ -28,5 +35,6 @@ const signUpFailed = (error) => {
 };
 
 export {
-  signUpSubmit
+  signUpSubmit,
+  signUpReset
 };
