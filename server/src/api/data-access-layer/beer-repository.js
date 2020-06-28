@@ -5,7 +5,11 @@ class BeerRepository {
     return await fetch('/beers', 'GET', null, params);
   }
 
-  getById = async (id) => {
+  getManyByIds = async (params) => {
+    return await fetch('/beers', 'GET', null, params);
+  }
+
+  getOneById = async (id) => {
     return await fetch(`/beers/${id}`);
   }
 }
