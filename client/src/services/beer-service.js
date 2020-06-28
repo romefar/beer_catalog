@@ -20,6 +20,10 @@ class BeerService {
     this.#params.page = 1;
   }
 
+  getFavouritesBeerItems = async (page) => {
+    return await fetch(`${this.#beerRoute}/favourites?page=${page}`);
+  }
+
   #configureRequest = (options) => {
     const {
       searchQuery,
