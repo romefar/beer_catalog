@@ -12,6 +12,7 @@ import parseIngredients from '../../../utils/parseIngredients';
 import parseBrewMethods from '../../../utils/parseBrewMethods';
 import BeerBrewItem from '../beer-brew-item';
 import { isFavourite } from '../../../utils/isBeerFavourite';
+import CommentsContainer from '../../../comments/containers/comments-container';
 
 const BeerDescription = (props) => {
   const { classes, isLoggedIn, isFavourite, onClick } = props;
@@ -105,6 +106,7 @@ const BeerDetails = (props) => {
         isFavourite={isFavourite(item.id, favourites)}
         onClick={onClick}
       />}
+      <CommentsContainer />
     </Fragment>
   );
 };
