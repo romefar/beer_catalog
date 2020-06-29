@@ -6,12 +6,14 @@ import signInReducer from './sign-in-reducer';
 import signUpReducer from './sign-up-reducer';
 import profileReducer from './profile-reducer';
 import beerFavouritesReducer from './beer-favourites-reducer';
+import commentsReducer from './comments-reducer';
 
 export default combineReducers({
   beerList: beerReducer,
   beerDetails: beerItemReducer,
   beerFavourites: beerFavouritesReducer,
   profile: profileReducer,
+  comments: commentsReducer,
   search: searchReducer,
   signIn: signInReducer,
   signUp: signUpReducer
