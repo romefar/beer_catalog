@@ -7,11 +7,17 @@ const authRoute = require('./api/controllers/auth-controller/routes');
 const profileRoute = require('./api/controllers/profile-controller/routes');
 const auth = require('./middlewares/auth');
 const app = express();
+const server = require('http').Server(app);
+const initSocket = require('./socket/initSocket');
+const socket = initSocket(server);
+const CommentsController = require('./api/controllers/comments-controller/controller');
+const controller = new CommentsController(socket);
+controller.listen();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../', 'uploads', 'profile-images')));
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: '*',
   methods: 'GET, POST, PATCH, DELETE'
 }));
 
@@ -32,7 +38,7 @@ const port = process.env.PORT || 5000;
 
 dbConnect()
   .then(() => {
-    app.listen(port, () => {
+    server.listen(port, () => {
       console.log(`Server is running on port ${port}\nDB is running.`);
     });
   })
