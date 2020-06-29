@@ -35,6 +35,7 @@ const Input = (props) => {
         {...config}
         className={clsx({
           [classes.inputItem]: true,
+          [classes.inputTextarea]: true,
           [classes.inputInvalid]: !isValid && isTouched
         })}
         value={value}

@@ -18,6 +18,9 @@ const styles = {
       background: '#f5f5f5'
     }
   },
+  inputTextarea: {
+    height: '200px'
+  },
   inputInvalid: {
     border: '2px solid red'
   },
