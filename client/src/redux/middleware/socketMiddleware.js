@@ -17,7 +17,10 @@ export default function socketMiddleware (socket) {
     }
 
     const [REQUEST, SUCCESS, FAILURE] = types;
-    next({ ...rest, type: REQUEST });
+
+    if (REQUEST) {
+      next({ ...rest, type: REQUEST });
+    }
 
     return promise(socket)
       .then((result) => {
