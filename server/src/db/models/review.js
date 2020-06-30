@@ -1,10 +1,9 @@
 const { Schema, model, Types } = require('mongoose');
 
-const commentSchema = new Schema({
+const reviewSchema = new Schema({
   rating: {
     type: Number,
-    default: 0,
-    required: true
+    default: 0
   },
   beerId: {
     type: Number,
@@ -19,4 +18,4 @@ const commentSchema = new Schema({
   timestamps: true
 });
 
-module.exports = model('Review', commentSchema);
+module.exports = model('Review', reviewSchema);
