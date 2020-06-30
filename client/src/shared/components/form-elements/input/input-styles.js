@@ -19,7 +19,8 @@ const styles = {
     }
   },
   inputTextarea: {
-    height: '200px'
+    height: '100px',
+    resize: 'none'
   },
   inputInvalid: {
     border: '2px solid red'
