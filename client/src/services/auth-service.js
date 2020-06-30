@@ -10,10 +10,10 @@ class AuthService {
   }
 
   #saveAuthData = (authData) => {
-    const { token, userName, image, expirationDate } = authData;
+    const { token, userName, userId, image, expirationDate } = authData;
     // Auto logout in 1 minute
     const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
-    localStorage.setItem(AUTH_TOKEN, JSON.stringify({ token, userName, image, expiration: tokenExpirationDate }));
+    localStorage.setItem(AUTH_TOKEN, JSON.stringify({ token, userId, userName, image, expiration: tokenExpirationDate }));
     return tokenExpirationDate;
   }
 
