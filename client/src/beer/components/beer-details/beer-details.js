@@ -106,7 +106,7 @@ const BeerDetails = (props) => {
         isFavourite={isFavourite(item.id, favourites)}
         onClick={onClick}
       />}
-      <CommentsContainer />
+      {item && <CommentsContainer id={item.id}/>}
     </Fragment>
   );
 };
