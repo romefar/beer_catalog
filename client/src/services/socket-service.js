@@ -15,10 +15,9 @@ class SocketService {
 
   disconnect () {
     return new Promise((resolve) => {
-      this.#socket.disconnect(() => {
-        this.#socket = null;
-        resolve();
-      });
+      this.#socket.disconnect();
+      this.#socket = null;
+      resolve();
     });
   }
 
@@ -31,7 +30,7 @@ class SocketService {
           return reject(new Error(response.error));
         }
 
-        return resolve();
+        return resolve(response);
       });
     });
   }
