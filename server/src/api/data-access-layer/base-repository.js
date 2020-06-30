@@ -27,8 +27,8 @@ class BaseRepository {
     return await this.model.create(data);
   }
 
-  update = async (conditionObject, updateObject) => {
-    return await this.model.findOneAndUpdate(conditionObject, updateObject, { new: true });
+  update = async (conditionObject, updateObject, session = null) => {
+    return await this.model.findOneAndUpdate(conditionObject, updateObject, { session, new: true });
   }
 }
 
