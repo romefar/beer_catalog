@@ -6,6 +6,11 @@ const commentSchema = new Schema({
     required: true,
     maxlength: 900
   },
+  reviewId: {
+    type: Types.ObjectId,
+    required: true,
+    ref: 'Review'
+  },
   creatorId: {
     type: Types.ObjectId,
     required: true,
