@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { isEmpty } from 'validator';
-import trim from '../../../utils/trim';
 import Input from '../../../shared/components/form-elements/input';
 import Button from '@material-ui/core/Button';
 import styles from './comment-form-styles';
 import validateField from '../../../utils/forms/validateFields';
 import { withStyles } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 class CommentForm extends Component {
   state = {
@@ -15,9 +15,7 @@ class CommentForm extends Component {
         config: {
           placeholder: 'Input you comment here...'
         },
-        preValidators: [
-          (str) => trim(str)
-        ],
+        preValidators: [],
         validators: [
           (str) => !isEmpty(str),
           (str) => str.length < 900
@@ -28,17 +26,39 @@ class CommentForm extends Component {
         value: ''
       }
     },
-    isFormValid: false
+    isFormValid: false,
+    isSent: false
+  }
+
+  componentDidUpdate = () => {
+    if (this.state.isSent) {
+      this.setState({
+        formData: {
+          description: {
+            ...this.state.formData.description,
+            isValid: false,
+            value: '',
+            isTouched: false
+          }
+        },
+        isFormValid: false,
+        isSent: false
+      });
+    }
   }
 
   onSubmitHandler = (e) => {
     e.preventDefault();
     if (this.state.isFormValid) {
       const formData = {
-        description: this.state.formData.description.value
+        id: this.props.id,
+        description: this.state.formData.description.value,
+        creatorId: '5ef76c80f92b1725dc4e8320'
       };
-      // this.props.onSubmit(formData);
-      console.log("From valid");
+      this.props.onSubmit(formData);
+      this.setState({
+        isSent: true
+      });
     }
   }
 
@@ -86,18 +106,27 @@ class CommentForm extends Component {
           {hasError && <div className={classes.errorMessage}>
             {hasError.message}
           </div>}
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.submitButton}
-            onClick={this.onSubmitHandler}
-          >
-            Submit
-          </Button>
+          <div className={classes.actions}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.submitButton}
+              onClick={this.onSubmitHandler}
+            >
+            Send
+            </Button>
+          </div>
         </form>
       </div>
     );
   }
 }
+
+CommentForm.propTypes = {
+  id: PropTypes.number.isRequired,
+  classes: PropTypes.object.isRequired,
+  hasError: PropTypes.object,
+  onSubmit: PropTypes.func.isRequired
+};
 
 export default withStyles(styles)(CommentForm);
