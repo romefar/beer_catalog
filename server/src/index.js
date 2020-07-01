@@ -4,6 +4,7 @@ const path = require('path');
 const dbConnect = require('./db/connection/mongoose');
 const beerRoute = require('./api/controllers/beer-controller/routes');
 const authRoute = require('./api/controllers/auth-controller/routes');
+const ratingRoute = require('./api/controllers/rating-controller/routes');
 const profileRoute = require('./api/controllers/profile-controller/routes');
 const auth = require('./middlewares/auth');
 const app = express();
@@ -23,6 +24,7 @@ app.use(cors({
 
 app.use('/beers', beerRoute);
 app.use(authRoute);
+app.use('/rating', ratingRoute);
 app.use('/profile', auth, profileRoute);
 
 app.use((error, req, res, next) => {
