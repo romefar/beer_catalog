@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleBeer } from '../../redux/actions/beer-item-actions/beer-item-actions';
 import { addBeerToFavourites, removeBeerFromFavourites } from '../../redux/actions/profile-actions/profile-actions';
+import { fetchRating, incrementRating, decrementRating } from '../../redux/actions/rating-actions/rating-actions';
 import { bindActionCreators } from 'redux';
 import BeerDetails from '../components/beer-details';
 import PropTypes from 'prop-types';
@@ -22,10 +23,22 @@ class BeerDetailsContainer extends Component {
   componentDidMount = () => {
     const { match: { params } } = this.props;
     this.fetchItem({ id: params.beerId });
+    this.props.fetchRating(params.beerId);
+  }
+
+  onIncrementRatingHandler = () => {
+    this.props.incrementRating(this.props.match.params.beerId);
+  }
+
+  onDecrementRatingHandler = () => {
+    this.props.decrementRating(this.props.match.params.beerId);
   }
 
   render = () => {
-    const { isLoading, hasError, item, isLoggedIn, favourites } = this.props;
+    const {
+      isLoading, hasError, item, isLoggedIn, favourites,
+      rating, ratingError, decremented, incremented
+    } = this.props;
     return (
       <BeerDetails
         isLoading={isLoading}
@@ -34,6 +47,12 @@ class BeerDetailsContainer extends Component {
         favourites={favourites}
         onClick={this.toggleFavourites}
         isLoggedIn={isLoggedIn}
+        rating={rating}
+        ratingError={ratingError}
+        decremented={decremented}
+        incremented={incremented}
+        onIncrement={this.onIncrementRatingHandler}
+        onDecrement={this.onDecrementRatingHandler}
       />
     );
   }
@@ -42,7 +61,8 @@ class BeerDetailsContainer extends Component {
 const mapStateToProps = ({
   beerDetails: { isLoading, hasError, item },
   signIn: { isLoggedIn, userData },
-  profile: { favourites }
+  profile: { favourites },
+  rating: { rating, hasError: ratingError, decremented, incremented }
 }) => {
   return {
     isLoading,
@@ -50,7 +70,11 @@ const mapStateToProps = ({
     isLoggedIn,
     userData,
     hasError,
-    item
+    item,
+    rating,
+    ratingError,
+    decremented,
+    incremented
   };
 };
 
@@ -58,7 +82,10 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     fetchSingleBeer,
     addBeerToFavourites,
-    removeBeerFromFavourites
+    removeBeerFromFavourites,
+    fetchRating,
+    incrementRating,
+    decrementRating
   }, dispatch);
 };
 
@@ -69,10 +96,17 @@ BeerDetailsContainer.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   favourites: PropTypes.array.isRequired,
+  rating: PropTypes.number.isRequired,
+  ratingError: PropTypes.object,
+  decremented: PropTypes.bool.isRequired,
+  incremented: PropTypes.bool.isRequired,
   userData: PropTypes.object,
   fetchSingleBeer: PropTypes.func.isRequired,
   removeBeerFromFavourites: PropTypes.func.isRequired,
-  addBeerToFavourites: PropTypes.func.isRequired
+  addBeerToFavourites: PropTypes.func.isRequired,
+  fetchRating: PropTypes.func.isRequired,
+  incrementRating: PropTypes.func.isRequired,
+  decrementRating: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BeerDetailsContainer);
