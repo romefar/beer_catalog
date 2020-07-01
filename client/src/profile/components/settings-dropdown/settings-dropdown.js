@@ -47,6 +47,7 @@ class SettingsDropdown extends PureComponent {
         <SettingsDropdownItem
           icon={<SettingsOutlinedIcon />}
           title="Settings"
+          to="/profile/settings"
         />
         <SettingsDropdownItem
           icon={<SettingsOutlinedIcon />}
