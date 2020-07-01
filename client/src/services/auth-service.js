@@ -9,6 +9,12 @@ class AuthService {
     return this.#timerId;
   }
 
+  updateImage = (image) => {
+    const storedData = JSON.parse(localStorage.getItem('AUTH_TOKEN'));
+    storedData.image = image;
+    localStorage.setItem(AUTH_TOKEN, JSON.stringify(storedData));
+  }
+
   #saveAuthData = (authData) => {
     const { token, userName, userId, image, expirationDate } = authData;
     // Auto logout in 1 minute
