@@ -4,7 +4,8 @@ import {
   REMOVE_BEER_ID_FROM_FAVOURITES_SUCCESS,
   REMOVE_BEER_ID_FROM_FAVOURITES_FAILURE,
   FETCH_BEER_IDS_LIST_FAVOURITES_SUCCESS,
-  FETCH_BEER_IDS_LIST_FAVOURITES_FAILURE
+  FETCH_BEER_IDS_LIST_FAVOURITES_FAILURE,
+  IMAGE_UPLOAD_FAILURE
 } from '../actions/profile-actions/profile-actions-types';
 
 const initialState = {
@@ -24,6 +25,7 @@ const profileReducer = (state = initialState, action) => {
     case ADD_BEER_ID_TO_FAVOURITES_FAILURE:
     case REMOVE_BEER_ID_FROM_FAVOURITES_FAILURE:
     case FETCH_BEER_IDS_LIST_FAVOURITES_FAILURE:
+    case IMAGE_UPLOAD_FAILURE:
       return {
         hasError: action.payload,
         favourites: []
