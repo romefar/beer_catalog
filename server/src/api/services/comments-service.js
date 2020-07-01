@@ -2,7 +2,7 @@ const commentsRespositry = require('../data-access-layer/comments-repository');
 const reviewRepository = require('../data-access-layer/review-repository');
 const beerRepository = require('../data-access-layer/beer-repository');
 
-const excludedFields = '-email -createdAt -updatedAt -favourites -__v';
+const excludedFields = '-email -createdAt -updatedAt -favourites -__v -likes -dislikes';
 
 class CommentsService {
   getInitialComments = async (id) => {
