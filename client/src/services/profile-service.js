@@ -12,6 +12,10 @@ class ProfileService {
   removeBeerFromFavourites = async (id) => {
     return await fetch(`/profile/beer/favourites/${id}`, 'DELETE');
   }
+
+  updateProfileImage = async (formData) => {
+    return await fetch('/profile/image/upload', 'POST', formData);
+  }
 }
 
 const getProfileService = (() => {
