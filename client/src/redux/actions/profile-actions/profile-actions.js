@@ -5,8 +5,12 @@ import {
   REMOVE_BEER_ID_FROM_FAVOURITES_SUCCESS,
   REMOVE_BEER_ID_FROM_FAVOURITES_FAILURE,
   FETCH_BEER_IDS_LIST_FAVOURITES_SUCCESS,
-  FETCH_BEER_IDS_LIST_FAVOURITES_FAILURE
+  FETCH_BEER_IDS_LIST_FAVOURITES_FAILURE,
+  IMAGE_UPLOAD_SUCCESS,
+  IMAGE_UPLOAD_FAILURE
 } from './profile-actions-types';
+
+import { updateSignInImage } from '../sign-in-actions/sign-in-actions';
 
 const fetchBeerFavouritesIds = () => async (dispatch) => {
   try {
@@ -77,8 +81,24 @@ const removeBeerFromFavouritesFailure = (error) => {
   };
 };
 
+const updateProfileImage = (formData) => async (dispatch) => {
+  try {
+    const imageData = await getProfileService().updateProfileImage(formData);
+    dispatch({
+      type: IMAGE_UPLOAD_SUCCESS
+    });
+    dispatch(updateSignInImage(imageData.imageUrl));
+  } catch (error) {
+    dispatch({
+      type: IMAGE_UPLOAD_FAILURE,
+      payload: error
+    });
+  }
+};
+
 export {
   addBeerToFavourites,
   removeBeerFromFavourites,
-  fetchBeerFavouritesIds
+  fetchBeerFavouritesIds,
+  updateProfileImage
 };
