@@ -11,7 +11,8 @@ const styles = {
     }
   },
   profileImage: {
-    width: '50px'
+    width: '50px',
+    height: '50px'
   },
   userName: {
     margin: '0 7px',
