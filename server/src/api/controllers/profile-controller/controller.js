@@ -3,11 +3,11 @@ const profileService = require('../../services/profile-service');
 class ProfileController {
   updateProfileImage = async (req, res, next) => {
     try {
-      await profileService.updateProfileImage({
-        ...req.body,
+      const imageUrl = await profileService.updateProfileImage({
+        userId: req.userId,
         image: req.file.path
       });
-      res.send({ message: 'Profile image updated.' });
+      res.send({ imageUrl });
     } catch (error) {
       next(error);
     }
