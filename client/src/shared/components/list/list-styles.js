@@ -6,7 +6,7 @@ const styles = {
     transition: 'background-color 0.5s ease-in'
   },
   container: {
-    padding: '0 12px',
+    padding: '0 24px 0 0',
     fontFamily: 'Helvetica, Arial, sans-serif'
   },
   title: {
