@@ -2,6 +2,7 @@ import getAuthService from '../../../services/auth-service';
 import {
   SIGNIN_SUCCESS,
   SIGNIN_FAILURE,
+  UPDATE_SIGNIN_IMAGE,
   LOGOUT
 } from './sign-in-actions-types';
 
@@ -12,6 +13,14 @@ const signInSubmit = (formData, history) => async (dispatch) => {
   } catch (error) {
     dispatch(signInFailed(error));
   }
+};
+
+const updateSignInImage = (image) => {
+  getAuthService().updateImage(image);
+  return {
+    type: UPDATE_SIGNIN_IMAGE,
+    payload: image
+  };
 };
 
 const signInSuccess = (authData, history) => {
@@ -42,5 +51,6 @@ const logout = () => {
 export {
   signInSubmit,
   signInSuccess,
+  updateSignInImage,
   logout
 };
