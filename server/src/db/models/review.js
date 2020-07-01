@@ -5,6 +5,16 @@ const reviewSchema = new Schema({
     type: Number,
     default: 0
   },
+  likes: [{
+    type: Types.ObjectId,
+    required: true,
+    ref: 'User'
+  }],
+  dislikes: [{
+    type: Types.ObjectId,
+    required: true,
+    ref: 'User'
+  }],
   beerId: {
     type: Number,
     required: true
