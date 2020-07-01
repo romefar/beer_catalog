@@ -13,9 +13,14 @@ import parseBrewMethods from '../../../utils/parseBrewMethods';
 import BeerBrewItem from '../beer-brew-item';
 import { isFavourite } from '../../../utils/isBeerFavourite';
 import CommentsContainer from '../../../comments/containers/comments-container';
+import BeerRating from '../beer-rating';
 
 const BeerDescription = (props) => {
-  const { classes, isLoggedIn, isFavourite, onClick } = props;
+  const {
+    classes, isLoggedIn, isFavourite, onClick,
+    rating, ratingError, decremented, incremented,
+    onIncrement, onDecrement
+  } = props;
   const {
     id,
     name,
@@ -79,6 +84,15 @@ const BeerDescription = (props) => {
         <List items={brewIngredientsItems} title="Ingredients"/>
         <List items={brewMethodsItems} title="Method"/>
       </div>
+      <BeerRating
+        rating={rating}
+        ratingError={ratingError}
+        decremented={decremented}
+        incremented={incremented}
+        onIncrement={onIncrement}
+        onDecrement={onDecrement}
+        isLoggedIn={isLoggedIn}
+      />
     </div>
   );
 };
@@ -88,11 +102,21 @@ BeerDescription.propTypes = {
   isFavourite: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  rating: PropTypes.number.isRequired,
+  ratingError: PropTypes.object,
+  decremented: PropTypes.bool.isRequired,
+  incremented: PropTypes.bool.isRequired,
+  onIncrement: PropTypes.func.isRequired,
+  onDecrement: PropTypes.func.isRequired
 };
 
 const BeerDetails = (props) => {
-  const { classes, isLoading, isLoggedIn, hasError, item, favourites, onClick } = props;
+  const {
+    classes, isLoading, isLoggedIn, hasError, item, favourites,
+    onClick, rating, ratingError, decremented, incremented,
+    onIncrement, onDecrement
+  } = props;
 
   return (
     <Fragment>
@@ -105,6 +129,12 @@ const BeerDetails = (props) => {
         isLoggedIn={isLoggedIn}
         isFavourite={isFavourite(item.id, favourites)}
         onClick={onClick}
+        rating={rating}
+        ratingError={ratingError}
+        decremented={decremented}
+        incremented={incremented}
+        onIncrement={onIncrement}
+        onDecrement={onDecrement}
       />}
       {item && <CommentsContainer id={item.id}/>}
     </Fragment>
@@ -118,7 +148,13 @@ BeerDetails.propTypes = {
   favourites: PropTypes.array.isRequired,
   onClick: PropTypes.func.isRequired,
   hasError: PropTypes.object,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  rating: PropTypes.number.isRequired,
+  ratingError: PropTypes.object,
+  decremented: PropTypes.bool.isRequired,
+  incremented: PropTypes.bool.isRequired,
+  onIncrement: PropTypes.func.isRequired,
+  onDecrement: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(BeerDetails);
