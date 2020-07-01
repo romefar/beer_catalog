@@ -1,7 +1,7 @@
 const profileRepository = require('../data-access-layer/profile-repository');
 const Joi = require('@hapi/joi');
 const HttpError = require('../../error-models/http-error');
-
+const fs = require('fs');
 class ProfileService {
   constructor () {
     this.repository = profileRepository;
@@ -17,7 +17,17 @@ class ProfileService {
       throw new HttpError('Invalid body data.', 400);
     }
     const { userId, image } = data;
-    await this.repository.update({ _id: userId }, { image });
+    const userImage = image.split('\\').pop();
+    const user = await this.repository.getById(userId);
+
+    if (user.image !== 'default_profile.png') {
+      fs.unlink(`uploads/profile-images/${user.image}`, (err) => {
+        if (err) throw err;
+        console.log('Image was deleted.');
+      });
+    }
+    await this.repository.update({ _id: userId }, { image: userImage });
+    return userImage;
   };
 
   addBeerToFavourites = async (params) => {
