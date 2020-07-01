@@ -24,7 +24,7 @@ const SettingsDropdownItem = ({ classes, icon, title, to, controlElement, divide
 
   if (to) {
     return (
-      <Link className={classes.link}>
+      <Link className={classes.link} to={to}>
         {content}
       </Link>
     );
