@@ -75,6 +75,32 @@ class BeerService {
 
     return await this.repository.getOneById(params.id);
   }
+
+  #parseBeerIngredients = (ingredients) => {
+    let maltArr = [];
+    let hopsArr = [];
+    if (ingredients.malt.length > 0) {
+      maltArr = ingredients.malt.map(item => item.name.toLowerCase().split(' ').join('_'));
+    }
+    if (ingredients.hops.length > 0) {
+      hopsArr = ingredients.hops.map(item => item.name.toLowerCase().split(' ').join('_'));
+    }
+    return [maltArr, hopsArr];
+  }
+
+  getBeerSuggestions = async (params) => {
+    const userId = '5ef76c80f92b1725dc4e8320';
+    const user = await profileRepository.getById(userId);
+    if (!user) {
+      throw new HttpError('User not found', 404);
+    }
+
+    const favourites = user.favourites;
+    if (favourites.length > 0) {
+      const ids = favourites.map(item => item.beerId);
+      const items = await this.repository.getManyByIds({ ids: ids.join('|') });
+    }
+  }
 }
 
 module.exports = new BeerService();
