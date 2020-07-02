@@ -13,6 +13,14 @@ class ProfileService {
     return await fetch(`/profile/beer/favourites/${id}`, 'DELETE');
   }
 
+  changeProfilePassword = async (formData) => {
+    return await fetch('/profile/password', 'PATCH', formData);
+  }
+
+  deleteProfile = async () => {
+    return await fetch('/profile', 'DELETE');
+  }
+
   updateProfileImage = async (formData) => {
     return await fetch('/profile/image/upload', 'POST', formData);
   }
