@@ -8,7 +8,16 @@ const styles = {
     },
     '& p': {
       margin: '0 0 10px 0'
+    },
+    '& label': {
+      textTransform: 'none'
+    },
+    '& label::firs-letter': {
+      textTransform: 'uppercase'
     }
+  },
+  formContainer: {
+    width: '500px'
   },
   divider: {
     height: '3px',
