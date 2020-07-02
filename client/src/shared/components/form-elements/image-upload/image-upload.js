@@ -61,7 +61,7 @@ class ImageUpload extends PureComponent {
 
   render = () => {
     const { previewUrl, isValid } = this.state;
-    const { classes, hasError } = this.props;
+    const { classes } = this.props;
     return (
       <div className={classes.container}>
         <input
@@ -93,7 +93,6 @@ class ImageUpload extends PureComponent {
             Save
           </Button>
           {!isValid && <p>Please, choose a file.</p>}
-          {hasError && <p>{hasError.message}</p>}
         </div>
       </div>
     );
