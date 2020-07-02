@@ -5,5 +5,7 @@ const imageUpload = require('../../../middlewares/file-upload');
 module.exports = Router()
   .get('/beer/favourites', controller.getBeerFavouritesList)
   .post('/image/upload', imageUpload.single('profile-image'), controller.updateProfileImage)
+  .patch('/password', controller.changeProfilePassword)
   .patch('/beer/favourites/:id', controller.addBeerToFavourites)
-  .delete('/beer/favourites/:id', controller.removeBeerFromFavourites);
+  .delete('/beer/favourites/:id', controller.removeBeerFromFavourites)
+  .delete('/', controller.deleteProfile);
