@@ -23,8 +23,12 @@ class BaseRepository {
     return await this.model.findOneAndDelete(options);
   }
 
-  create = async (data) => {
-    return await this.model.create(data);
+  deleteMany = async (options, session = null) => {
+    return await this.model.remove(options, { session });
+  }
+
+  create = async (data, session) => {
+    return await this.model.create(data, { session });
   }
 
   update = async (conditionObject, updateObject, session = null) => {
