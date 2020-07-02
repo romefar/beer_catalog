@@ -29,7 +29,7 @@ class CommentsRepository extends BaseRepository {
     const comment = await this.model.create({
       reviewId: review._id,
       ...data
-    });
+    }, session);
     review.comments.push(comment);
     await review.save({ session });
     await session.commitTransaction();
