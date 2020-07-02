@@ -2,6 +2,8 @@ const profileRepository = require('../data-access-layer/profile-repository');
 const Joi = require('@hapi/joi');
 const HttpError = require('../../error-models/http-error');
 const fs = require('fs');
+const bcrypt = require('bcryptjs');
+
 class ProfileService {
   constructor () {
     this.repository = profileRepository;
@@ -68,6 +70,35 @@ class ProfileService {
     return user;
   }
 
+  changeProfilePassword = async (params) => {
+    const isValid = Joi.object({
+      currentPassword: Joi.string().required(),
+      newPassword: Joi.string().required(),
+      userId: Joi.string().required()
+    }).validate(params);
+
+    if (isValid.error) {
+      throw new HttpError('Invalid data. Check your fields.', 400);
+    };
+
+    const { userId, currentPassword, newPassword } = params;
+    const user = await this.repository.getById(userId);
+    if (!user) {
+      throw new HttpError('A user wasn\'t found.', 404);
+    }
+
+    const isPasswordEquals = await bcrypt.compare(currentPassword, user.password);
+    if (!isPasswordEquals) {
+      throw new HttpError('Invalid username/password. Check your fields.', 404);
+    }
+    const password = await bcrypt.hash(newPassword, 12);
+    await this.repository.update({
+      _id: userId
+    }, {
+      password
+    });
+  }
+
   removeBeerFromFavourites = async (params) => {
     const isValid = Joi.object({
       id: Joi.number().required(),
@@ -93,6 +124,18 @@ class ProfileService {
     }
 
     return updatedUser;
+  }
+
+  deleteUser = async (params) => {
+    await this.repository.update({
+      _id: params.userId
+    }, {
+      name: 'DELETED',
+      image: 'deleted.jpg',
+      email: `none ${params.userId}`,
+      password: 'deleted',
+      favourites: []
+    });
   }
 }
 
