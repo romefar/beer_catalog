@@ -13,6 +13,27 @@ class ProfileController {
     }
   }
 
+  deleteProfile = async (req, res, next) => {
+    try {
+      await profileService.deleteUser({ userId: req.userId });
+      res.send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  changeProfilePassword = async (req, res, next) => {
+    try {
+      await profileService.changeProfilePassword({
+        userId: req.userId,
+        ...req.body
+      });
+      res.send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
   getBeerFavouritesList = async (req, res, next) => {
     try {
       const user = await profileService.getBeerFavouritesList(req.userId);
