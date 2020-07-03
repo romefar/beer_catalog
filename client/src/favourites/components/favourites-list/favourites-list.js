@@ -5,6 +5,7 @@ import withStyles from 'react-jss';
 import styles from './favourites-list-styles';
 import LoadingSpinner from '../../../shared/components/ui-elements/loading-spinner';
 import MessageBox from '../../../shared/components/ui-elements/message-box';
+import { Link } from 'react-router-dom';
 
 const FavouritesList = ({ classes, isLoading, hasError, items, favourites, onFavouriteClick, paginationElement }) => {
   return (
@@ -25,6 +26,12 @@ const FavouritesList = ({ classes, isLoading, hasError, items, favourites, onFav
           />
         );
       })}
+      {items.length === 0 && !isLoading &&
+      <MessageBox text="You don't have favourites yet.">
+        <Link to="/">
+          Visit our page to discover new beer
+        </Link>
+      </MessageBox>}
       <div className={classes.paginationContainer}>
         {items.length > 0 && paginationElement}
       </div>
