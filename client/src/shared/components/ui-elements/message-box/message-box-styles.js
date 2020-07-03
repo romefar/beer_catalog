@@ -6,7 +6,11 @@ const styles = {
   container: {
     width: '40vw',
     margin: '20px auto',
-    textAlign: 'center'
+    textAlign: 'center',
+    '& a': {
+      fontFamily: 'Helvetica, Arial, sans-serif',
+      color: '#696969'
+    }
   }
 };
 
