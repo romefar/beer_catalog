@@ -13,6 +13,7 @@ class BeerService {
     ibu_gt: null,
     ebc_gt: null
   }
+  // TODO: move image replacer to server!
 
   #defaultImageUrl = 'http://pluspng.com/img-png/beer-bottle-png-hd-a-beer-bottle-beer-bottle-brown-foam-free-png-and-psd-650.jpg';
 
@@ -67,6 +68,10 @@ class BeerService {
     return {
       data: fixeditems
     };
+  }
+
+  fetchBeerSuggestions = async (page) => {
+    return await fetch(`/beers/suggestions?page=${page}`);
   }
 
   fetchBeerItems = async (options) => {
