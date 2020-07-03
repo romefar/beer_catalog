@@ -16,7 +16,7 @@ const BeerPropertyItem = (props) => {
         </Tooltip>
       </span>
       <span className={classes.value}>
-        {value}
+        {value || '—'}
       </span>
     </div>
   );
@@ -26,7 +26,7 @@ BeerPropertyItem.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired
+  value: PropTypes.number
 };
 
 export default withStyles(styles)(BeerPropertyItem);
