@@ -10,6 +10,7 @@ import BeerDetailsContainer from '../beer/containers/beer-details-container';
 import SignUpContainer from '../authorization/containers/sign-up-container';
 import SignInContainer from '../authorization/containers/sign-in-container';
 import ProfileContainer from '../profile/containers/profile-container';
+import BeerSuggestionsContainer from '../suggestions/containers/beer-suggestions-container';
 import FavouritesContainer from '../favourites/containers/favourites-container';
 import { logout, signInSuccess } from '../redux/actions/sign-in-actions/sign-in-actions';
 import { fetchBeerFavouritesIds } from '../redux/actions/profile-actions/profile-actions';
@@ -51,6 +52,7 @@ class App extends Component {
           <Route path="/" component={BeerContainer} exact />
           <PrivateRoute path="/beer/favourites" component={FavouritesContainer} exact/>
           <PrivateRoute path="/profile/settings" component={ProfileContainer} exact/>
+          <PrivateRoute path="/suggestions" component={BeerSuggestionsContainer} exact/>
           <Route path="/beer/:beerId" component={BeerDetailsContainer} />
           {!isLoggedIn && <Route path="/signup" component={SignUpContainer} />}
           {!isLoggedIn && <Route path="/signin" component={SignInContainer} />}
