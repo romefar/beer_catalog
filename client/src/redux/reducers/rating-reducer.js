@@ -18,7 +18,7 @@ const ratingReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_RATING_SUCCESS:
       return {
-        ...state,
+        hasError: null,
         rating: action.payload.rating,
         decremented: action.payload.decremented,
         incremented: action.payload.incremented
