@@ -64,7 +64,6 @@ class AuthService {
       throw new HttpError('This email address as already taken.', 409);
     }
     const hashedPassword = await bcrypt.hash(password, 12);
-
     const user = await this.repository.create({
       ...data,
       image: 'default_profile.png',
