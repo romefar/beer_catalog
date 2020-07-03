@@ -18,6 +18,14 @@ const NavLinks = ({ classes, isLoggedIn }) => {
           Favourites
         </NavLink>
       </li>}
+      {isLoggedIn && <li>
+        <NavLink
+          className={classes.navLinkItem}
+          to="/suggestions"
+        >
+          Suggestions
+        </NavLink>
+      </li>}
       {!isLoggedIn && <li>
         <Link to="/signup">
           <button className={classes.authButton}>
