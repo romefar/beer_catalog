@@ -2,6 +2,7 @@ const beerRepository = require('../data-access-layer/beer-repository');
 const profileRepository = require('../data-access-layer/profile-repository');
 const Joi = require('@hapi/joi');
 const HttpError = require('../../error-models/http-error');
+const getMostFrequentItem = require('../../utlis/getMostFrequent');
 
 class BeerService {
   constructor () {
@@ -42,6 +43,7 @@ class BeerService {
       item.addedToFavouriteDate = beerFavouritesItemsAddDate[item.id];
       return item;
     });
+    // TODO: CHANGE from ROUNG to CEIL
     const pages = Math.round(user.favourites.length / defaultItemsPerPage);
     return { items: [...beerFavouritesItemsWithDate], pages };
   }
@@ -76,30 +78,78 @@ class BeerService {
     return await this.repository.getOneById(params.id);
   }
 
-  #parseBeerIngredients = (ingredients) => {
-    let maltArr = [];
-    let hopsArr = [];
-    if (ingredients.malt.length > 0) {
-      maltArr = ingredients.malt.map(item => item.name.toLowerCase().split(' ').join('_'));
-    }
-    if (ingredients.hops.length > 0) {
-      hopsArr = ingredients.hops.map(item => item.name.toLowerCase().split(' ').join('_'));
-    }
-    return [maltArr, hopsArr];
-  }
-
   getBeerSuggestions = async (params) => {
-    const userId = '5ef76c80f92b1725dc4e8320';
-    const user = await profileRepository.getById(userId);
+    const defaultItemsPerPage = 10;
+
+    const isValid = Joi.object({
+      page: Joi.number().required(),
+      userId: Joi.string().required()
+    }).validate(params);
+
+    if (isValid.error || params.page === 0) {
+      throw new HttpError('Invalid URL parameters.', 400);
+    };
+
+    const user = await profileRepository.getById(params.userId);
     if (!user) {
       throw new HttpError('User not found', 404);
     }
 
     const favourites = user.favourites;
     if (favourites.length > 0) {
-      const ids = favourites.map(item => item.beerId);
-      const items = await this.repository.getManyByIds({ ids: ids.join('|') });
+      const [hopName, maltName] = this.#getFavouritesSuggestions(favourites);
+
+      let pages = null;
+      if (params.page === '1') {
+        // get first 60 suggestions
+        const beerItemsPages = await this.repository.getAll({
+          hops: hopName,
+          malt: maltName,
+          per_page: 60
+        });
+        pages = Math.ceil(beerItemsPages.length / defaultItemsPerPage);
+      }
+
+      const beerItems = await this.repository.getAll({
+        page: params.page,
+        per_page: defaultItemsPerPage,
+        hops: hopName,
+        malt: maltName
+      });
+
+      const beerItemsImageFixed = beerItems.map(item => {
+        item.image_url = item.image_url || 'http://pluspng.com/img-png/beer-bottle-png-hd-a-beer-bottle-beer-bottle-brown-foam-free-png-and-psd-650.jpg';
+        return item;
+      });
+
+      const responseBeerItems = params.page === '1' ? {
+        items: [...beerItemsImageFixed],
+        isSuggestAvailable: true,
+        pages
+      } : {
+        items: [...beerItemsImageFixed],
+        isSuggestAvailable: true
+      };
+
+      return responseBeerItems;
     }
+    return {
+      isSuggestAvailable: false,
+      items: []
+    };
+  }
+
+  #getFavouritesSuggestions = (favourites) => {
+    const hopsItems = favourites.map(item => item.hops.split(','));
+    const hopsArray = hopsItems.flat();
+
+    const maltItems = favourites.map(item => item.malt.split(','));
+    const maltArray = maltItems.flat();
+
+    // most popular hops & malt bases on user's favourites
+    const hopName = getMostFrequentItem(hopsArray);
+    const maltName = getMostFrequentItem(maltArray);
+    return [hopName, maltName];
   }
 }
 

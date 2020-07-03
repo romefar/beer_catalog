@@ -1,8 +1,10 @@
 const profileRepository = require('../data-access-layer/profile-repository');
+const beerRepositry = require('../data-access-layer/beer-repository');
 const Joi = require('@hapi/joi');
 const HttpError = require('../../error-models/http-error');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
+const parseIngredients = require('../../utlis/parseIngredients');
 
 class ProfileService {
   constructor () {
@@ -42,13 +44,21 @@ class ProfileService {
       throw new HttpError('Cannot find route.', 404);
     };
 
+    const beerItem = await beerRepositry.getOneById(params.id);
+    if (!beerItem) {
+      throw new HttpError('Beer wasn\'t found');
+    }
+    const [malt, hops] = parseIngredients(beerItem.pop().ingredients);
+
     // TODO: Add check for existing ids
     const updatedUser = await this.repository.update({
       _id: params.userId
     }, {
       $push: {
         favourites: {
-          beerId: params.id
+          beerId: params.id,
+          malt,
+          hops
         }
       }
     });

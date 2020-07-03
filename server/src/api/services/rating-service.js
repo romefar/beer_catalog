@@ -27,6 +27,7 @@ class RatingService {
 
     const incremented = beerRating.likes.includes(userId);
     const decremented = beerRating.dislikes.includes(userId);
+
     return {
       rating: beerRating.rating,
       decremented,
