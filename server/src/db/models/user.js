@@ -3,9 +3,15 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 const favBeerSchema = new Schema({
   beerId: {
-    type: Number,
-    required: true,
-    unique: true
+    type: Number
+  },
+  hops: {
+    type: String,
+    default: 'none'
+  },
+  malt: {
+    type: String,
+    default: 'none'
   },
   addDate: {
     type: Date,
