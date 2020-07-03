@@ -8,6 +8,7 @@ import profileReducer from './profile-reducer';
 import beerFavouritesReducer from './beer-favourites-reducer';
 import commentsReducer from './comments-reducer';
 import ratingReducer from './rating-reducer';
+import beerSuggestionsReducer from './beer-suggestions-reducer';
 
 export default combineReducers({
   beerList: beerReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   search: searchReducer,
   signIn: signInReducer,
   signUp: signUpReducer,
-  rating: ratingReducer
+  rating: ratingReducer,
+  beerSuggestions: beerSuggestionsReducer
 });
