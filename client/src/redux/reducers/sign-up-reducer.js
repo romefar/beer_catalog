@@ -1,6 +1,7 @@
 import {
   SIGNUP_SUCCESS,
-  SIGNUP_FAILURE
+  SIGNUP_FAILURE,
+  SIGNUP_RESET
 } from '../actions/sign-up-actions/sign-up-actions-types';
 
 const initialState = {
@@ -16,6 +17,10 @@ const signUpReducer = (state = initialState, action) => {
         isRegistered: true,
         hasError: null,
         userData: action.payload
+      };
+    case SIGNUP_RESET:
+      return {
+        ...initialState
       };
     case SIGNUP_FAILURE:
       return {
