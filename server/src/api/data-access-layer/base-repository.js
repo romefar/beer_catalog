@@ -27,8 +27,13 @@ class BaseRepository {
     return await this.model.remove(options, { session });
   }
 
-  create = async (data, session) => {
-    return await this.model.create(data, { session });
+  createMany = async (data, session = null) => {
+    return await this.model.create([...data], { session });
+  }
+
+  create = async (data, session = null) => {
+    const item = await this.model.create([data], { session });
+    return item.pop();
   }
 
   update = async (conditionObject, updateObject, session = null) => {
