@@ -22,10 +22,10 @@ app.use(cors({
   methods: 'GET, POST, PATCH, DELETE'
 }));
 
-app.use('/beers', beerRoute);
-app.use(authRoute);
 app.use('/rating', ratingRoute);
+app.use('/beers', beerRoute);
 app.use('/profile', auth, profileRoute);
+app.use(authRoute);
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {
