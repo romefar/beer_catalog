@@ -10,6 +10,7 @@ import BeerDetailsContainer from '../beer/containers/beer-details-container';
 import SignUpContainer from '../authorization/containers/sign-up-container';
 import SignInContainer from '../authorization/containers/sign-in-container';
 import ProfileContainer from '../profile/containers/profile-container';
+import ProflieDetailsContainer from '../profile/containers/profile-details-container';
 import BeerSuggestionsContainer from '../suggestions/containers/beer-suggestions-container';
 import FavouritesContainer from '../favourites/containers/favourites-container';
 import { logout, signInSuccess } from '../redux/actions/sign-in-actions/sign-in-actions';
@@ -53,6 +54,7 @@ class App extends Component {
           <PrivateRoute path="/beer/favourites" component={FavouritesContainer} exact/>
           <PrivateRoute path="/profile/settings" component={ProfileContainer} exact/>
           <PrivateRoute path="/suggestions" component={BeerSuggestionsContainer} exact/>
+          <PrivateRoute path="/profile" component={ProflieDetailsContainer} exact/>
           <Route path="/beer/:beerId" component={BeerDetailsContainer} />
           {!isLoggedIn && <Route path="/signup" component={SignUpContainer} />}
           {!isLoggedIn && <Route path="/signin" component={SignInContainer} />}
