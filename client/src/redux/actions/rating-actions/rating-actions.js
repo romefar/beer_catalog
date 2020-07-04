@@ -11,9 +11,24 @@ import {
 const TYPE_INCREMENT = 'inc';
 const TYPE_DECREMENT = 'dec';
 
-const fetchRating = (id) => async (dispatch) => {
+const fetchRatingFull = (id) => async (dispatch) => {
   try {
-    const beerRatingData = await getRatingService().getBeerRating(id);
+    const beerRatingData = await getRatingService().getBeerRatingFull(id);
+    dispatch({
+      type: FETCH_RATING_SUCCESS,
+      payload: beerRatingData
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_RATING_FAILURE,
+      payload: error
+    });
+  }
+};
+
+const fetchRatingValueOnly = (id) => async (dispatch) => {
+  try {
+    const beerRatingData = await getRatingService().getBeerRatingValueOnly(id);
     dispatch({
       type: FETCH_RATING_SUCCESS,
       payload: beerRatingData
@@ -57,7 +72,8 @@ const decrementRating = (id) => async (dispatch) => {
 };
 
 export {
-  fetchRating,
+  fetchRatingFull,
+  fetchRatingValueOnly,
   incrementRating,
   decrementRating
 };
