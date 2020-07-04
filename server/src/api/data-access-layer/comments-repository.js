@@ -26,14 +26,14 @@ class CommentsRepository extends BaseRepository {
     const session = await startSession();
     session.startTransaction();
     const review = await reviewRepository.getOneByCriteria({ beerId: id });
-    const comment = await this.model.create([{
+    const comment = await Comment.create([{
       reviewId: review._id,
       ...data
-    }], session);
-    review.comments.push(comment);
+    }], { session });
+    review.comments.push(comment[0]);
     await review.save({ session });
     await session.commitTransaction();
-    return comment;
+    return comment[0];
   }
 }
 
