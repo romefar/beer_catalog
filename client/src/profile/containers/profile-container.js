@@ -106,7 +106,7 @@ ProfileContainer.propTypes = {
   updateProfileImage: PropTypes.func.isRequired,
   changeProfilePassword: PropTypes.func.isRequired,
   actionCompletedSuccessfully: PropTypes.bool.isRequired,
-  deleteProfile: PropTypes.bool.isRequired
+  deleteProfile: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
