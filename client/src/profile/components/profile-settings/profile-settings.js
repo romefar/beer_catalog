@@ -116,7 +116,6 @@ ProfileSettings.propTypes = {
   isSuccessOpen: PropTypes.bool.isRequired,
   isErrorOpen: PropTypes.bool.isRequired,
   isModalVisible: PropTypes.bool.isRequired,
-  onAlertClose: PropTypes.func.isRequired,
   onModalOpen: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired,
   onDeleteProfile: PropTypes.func.isRequired,
