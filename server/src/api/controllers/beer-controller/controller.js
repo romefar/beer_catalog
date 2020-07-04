@@ -22,6 +22,15 @@ class BeerController {
     }
   }
 
+  getSuggestionsByYeast = async (req, res, next) => {
+    try {
+      const beerItem = await beerService.getBeerSuggestionsByYeast({ ...req.query, userId: req.userId });
+      res.send(beerItem);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   getSuggestions = async (req, res, next) => {
     try {
       const beerItem = await beerService.getBeerSuggestions({ ...req.query, userId: req.userId });
