@@ -8,12 +8,15 @@ import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import Modal from '../../../shared/components/ui-elements/modal';
+// import CommentsFilter from '../comments-filter';
 
 const CommentsList = (props) => {
-  const {
+  let {
     classes, hasError, items, isLoading, isLoggedIn, userData, hasNewComments, isModalVisible,
     onUpdateClick, closeModalHandler, showModalHandler, deleteCommentHandler
+    // onSelectChangeHandler
   } = props;
+  items = items.sort((item1, item2) => new Date(item1.createdAt) < new Date(item2.createdAt));
   return (
     <div className={classes.container}>
       <Modal
@@ -38,6 +41,11 @@ const CommentsList = (props) => {
         }>
         <p>Do you want to delete your comment? Please note that it cannot be undone. </p>
       </Modal>
+      <h3>{`Comments ${items.length}:`}</h3>
+      {/* {!isLoading &&
+       <CommentsFilter
+         onSelectChange={onSelectChangeHandler}
+       />} */}
       {isLoading && <LoadingSpinner />}
       {hasNewComments &&
         <div className={classes.updateButtonContainer}>
@@ -86,7 +94,8 @@ CommentsList.propTypes = {
   onUpdateClick: PropTypes.func.isRequired,
   closeModalHandler: PropTypes.func.isRequired,
   showModalHandler: PropTypes.func.isRequired,
-  deleteCommentHandler: PropTypes.func.isRequired
+  deleteCommentHandler: PropTypes.func.isRequired,
+  onSelectChangeHandler: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(CommentsList);
