@@ -1,9 +1,18 @@
 const ratingService = require('../../services/rating-service');
 
 class RatingController {
-  getBeerRating = async (req, res, next) => {
+  getBeerRatingValueOnly = async (req, res, next) => {
     try {
-      const ratingData = await ratingService.getBeerRating({ userId: req.userId, ...req.params });
+      const ratingData = await ratingService.getBeerRatingValue({ ...req.params });
+      res.send(ratingData);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  getBeerRatingFull = async (req, res, next) => {
+    try {
+      const ratingData = await ratingService.getBeerRatingFull({ userId: req.userId, ...req.params });
       res.send(ratingData);
     } catch (error) {
       next(error);
