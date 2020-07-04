@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import SettingsDropdownItem from '../settings-dropdown-item';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+import AccountBoxOutlinedIcon from '@material-ui/icons/AccountBoxOutlined';
 import NightsStayOutlinedIcon from '@material-ui/icons/NightsStayOutlined';
 import Switch from '@material-ui/core/Switch';
 
@@ -45,13 +46,16 @@ class SettingsDropdown extends PureComponent {
         className={this.props.classes.container}
         ref={node => { this.node = node; } }>
         <SettingsDropdownItem
-          icon={<SettingsOutlinedIcon />}
-          title="Settings"
-          to="/profile/settings"
+          icon={<AccountBoxOutlinedIcon />}
+          onClick={this.props.onClick}
+          title="Profile"
+          to="/profile"
         />
         <SettingsDropdownItem
           icon={<SettingsOutlinedIcon />}
-          title="Profile"
+          title="Settings"
+          onClick={this.props.onClick}
+          to="/profile/settings"
         />
         <SettingsDropdownItem divider />
         <SettingsDropdownItem
