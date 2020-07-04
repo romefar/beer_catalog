@@ -17,8 +17,30 @@ import {
   SET_UPDATE_COMMENTS_HANDLER_FAILURE,
   SHOW_NEW_COMMENTS,
   DELETE_COMMENT_SUCCESS,
-  DELETE_COMMENT_FAILURE
+  DELETE_COMMENT_FAILURE,
+  COMMENTS_FILTER_BY_DATE_ASC,
+  COMMENTS_FILTER_BY_DATE_DESC,
+  COMMENTS_FILTER_BY_USER_ID
 } from './comments-actions-types';
+
+const filterCommentsByDateAscending = () => {
+  return {
+    type: COMMENTS_FILTER_BY_DATE_ASC
+  };
+};
+
+const filterCommentsByDateDescending = () => {
+  return {
+    type: COMMENTS_FILTER_BY_DATE_DESC
+  };
+};
+
+const filterCommentsByUserId = (userId) => {
+  return {
+    type: COMMENTS_FILTER_BY_USER_ID,
+    payload: userId
+  };
+};
 
 const showNewComments = () => {
   return {
@@ -95,5 +117,8 @@ export {
   socketSetNewMessageHandler,
   socketLoadInitialComments,
   socketDeleteComment,
-  showNewComments
+  showNewComments,
+  filterCommentsByDateAscending,
+  filterCommentsByDateDescending,
+  filterCommentsByUserId
 };
