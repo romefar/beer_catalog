@@ -27,33 +27,41 @@ const beerTypes = [
   { title: 'London Ale Saflager' }
 ];
 
-const BeerSuggestInput = ({ classes }) => {
-  const onInputChange = (e, value) => {
-    console.log(value);
-  }
+const BeerSuggestInput = ({ classes, value, onInputChange, onSubmit }) => {
   return (
     <div className={classes.container}>
-      <Autocomplete
-        id="free-solo-demo"
-        freeSolo
-        className={classes.searchInput}
-        options={beerTypes.map((option) => option.title)}
-        size="small"
-        onInputChange={onInputChange}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search by yeast"
-            placeholder="Input yeast name..."
-            margin="normal"
-            variant="outlined" />
-        )}
-      />
-      <IconButton>
-        <SearchIcon />
-      </IconButton>
+      <h2>Let us know your yeast preferences</h2>
+      <form className={classes.searchForm} onSubmit={onSubmit}>
+        <Autocomplete
+          id="free-solo-demo"
+          freeSolo
+          className={classes.searchInput}
+          options={beerTypes.map((option) => option.title)}
+          size="small"
+          value={value}
+          onInputChange={onInputChange}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Search by yeast"
+              placeholder="Input yeast name..."
+              margin="normal"
+              variant="outlined" />
+          )}
+        />
+        <IconButton onClick={onSubmit}>
+          <SearchIcon />
+        </IconButton>
+      </form>
     </div>
   );
+};
+
+BeerSuggestInput.propTypes = {
+  classes: PropTypes.object.isRequired,
+  value: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(BeerSuggestInput);
