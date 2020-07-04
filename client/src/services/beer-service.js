@@ -74,6 +74,11 @@ class BeerService {
     return await fetch(`/beers/suggestions?page=${page}`);
   }
 
+  fetchBeerSuggestionsByYeast = async (page, yeast) => {
+    const yeastURI = yeast.toLowerCase().split(' ').join('_');
+    return await fetch(`/beers/suggestions?page=${page}&yeast=${yeastURI}`);
+  }
+
   fetchBeerItems = async (options) => {
     this.#configureRequest(options);
     const url = this.#generateUrl();

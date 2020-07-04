@@ -1,7 +1,11 @@
 import fetch from '../utils/fetch';
 
 class RatingService {
-  getBeerRating = async (id) => {
+  getBeerRatingValueOnly = async (id) => {
+    return await fetch(`/rating/beer/${id}/value`);
+  }
+
+  getBeerRatingFull = async (id) => {
     return await fetch(`/rating/beer/${id}`);
   }
 

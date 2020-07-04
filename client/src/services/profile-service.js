@@ -5,6 +5,10 @@ class ProfileService {
     return await fetch(`/profile/beer/favourites/${id}`, 'PATCH');
   }
 
+  getProfileData = async () => {
+    return await fetch('/profile');
+  }
+
   getBeerFavouritesList = async () => {
     return await fetch('/profile/beer/favourites');
   }
