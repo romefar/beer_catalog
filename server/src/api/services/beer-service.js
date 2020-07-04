@@ -4,14 +4,15 @@ const Joi = require('@hapi/joi');
 const HttpError = require('../../error-models/http-error');
 const getMostFrequentItem = require('../../utlis/getMostFrequent');
 
+const defaultItemsPerPage = 10;
+const defaultImage = 'http://pluspng.com/img-png/beer-bottle-png-hd-a-beer-bottle-beer-bottle-brown-foam-free-png-and-psd-650.jpg';
+
 class BeerService {
   constructor () {
     this.repository = beerRepository;
   }
 
   getBeerFavouritesItems = async (params) => {
-    const defaultItemsPerPage = 10;
-
     const isValid = Joi.object({
       page: Joi.number().required(),
       userId: Joi.string().required()
@@ -78,15 +79,56 @@ class BeerService {
     return await this.repository.getOneById(params.id);
   }
 
-  getBeerSuggestions = async (params) => {
-    const defaultItemsPerPage = 10;
+  #getBeerSuggestionsByYeast = async (params) => {
+    const isValid = Joi.object({
+      page: Joi.number().required(),
+      userId: Joi.string().required(),
+      yeast: Joi.string().required()
+    }).validate(params);
 
+    if (isValid.error || params.page === '0') {
+      throw new HttpError('Invalid URL parameters.', 400);
+    };
+
+    let pages = null;
+    if (params.page === '1') {
+      // get first 60 suggestions
+      const beerItemsPages = await this.repository.getAll({
+        yeast: params.yeast,
+        per_page: 60
+      });
+      pages = Math.ceil(beerItemsPages.length / defaultItemsPerPage);
+    }
+
+    const beerItems = await this.repository.getAll({
+      page: params.page,
+      per_page: defaultItemsPerPage,
+      yeast: params.yeast
+    });
+
+    const beerItemsImageFixed = beerItems.map(item => {
+      item.image_url = item.image_url || defaultImage;
+      return item;
+    });
+
+    const responseBeerItems = params.page === '1' ? {
+      items: [...beerItemsImageFixed],
+      isYeastSuggestion: true,
+      pages
+    } : {
+      items: [...beerItemsImageFixed],
+      isYeastSuggestion: true
+    };
+    return responseBeerItems;
+  }
+
+  #getBeerSuggestionByUserPreference = async (params) => {
     const isValid = Joi.object({
       page: Joi.number().required(),
       userId: Joi.string().required()
     }).validate(params);
 
-    if (isValid.error || params.page === 0) {
+    if (isValid.error || params.page === '0') {
       throw new HttpError('Invalid URL parameters.', 400);
     };
 
@@ -118,7 +160,7 @@ class BeerService {
       });
 
       const beerItemsImageFixed = beerItems.map(item => {
-        item.image_url = item.image_url || 'http://pluspng.com/img-png/beer-bottle-png-hd-a-beer-bottle-beer-bottle-brown-foam-free-png-and-psd-650.jpg';
+        item.image_url = item.image_url || defaultImage;
         return item;
       });
 
@@ -137,6 +179,14 @@ class BeerService {
       isSuggestAvailable: false,
       items: []
     };
+  }
+
+  getBeerSuggestions = async (params) => {
+    // Try to refactor
+    if (params.yeast) {
+      return await this.#getBeerSuggestionsByYeast(params);
+    }
+    return await this.#getBeerSuggestionByUserPreference(params);
   }
 
   #getFavouritesSuggestions = (favourites) => {
