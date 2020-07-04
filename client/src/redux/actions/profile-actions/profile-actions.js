@@ -14,10 +14,31 @@ import {
   PASSWORD_CHANGE_FAILURE,
   DELETE_PROFILE_REQUEST,
   DELETE_PROFILE_SUCCESS,
-  DELETE_PROFILE_FAILURE
+  DELETE_PROFILE_FAILURE,
+  FETCH_PROFILE_DATA_REQUEST,
+  FETCH_PROFILE_DATA_FAILURE,
+  FETCH_PROFILE_DATA_SUCCESS
 } from './profile-actions-types';
 
 import { updateSignInImage, logout } from '../sign-in-actions/sign-in-actions';
+
+const fetchProfileData = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: FETCH_PROFILE_DATA_REQUEST
+    });
+    const profileData = await getProfileService().getProfileData();
+    dispatch({
+      type: FETCH_PROFILE_DATA_SUCCESS,
+      payload: profileData
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_PROFILE_DATA_FAILURE,
+      payload: error
+    });
+  }
+};
 
 const fetchBeerFavouritesIds = () => async (dispatch) => {
   try {
@@ -147,5 +168,6 @@ export {
   fetchBeerFavouritesIds,
   updateProfileImage,
   changeProfilePassword,
-  deleteProfile
+  deleteProfile,
+  fetchProfileData
 };
