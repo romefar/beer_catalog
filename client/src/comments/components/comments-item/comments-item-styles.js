@@ -8,7 +8,7 @@ const styles = {
     margin: '0 30px 0 0 ',
     '& img': {
       width: '100%',
-      borderRadius: '40px'
+      borderRadius: '50%'
     }
   },
   actions: {
