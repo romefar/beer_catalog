@@ -7,13 +7,35 @@ class RatingService {
     this.repository = reviewRepository;
   }
 
-  getBeerRating = async (params) => {
+  getBeerRatingValue = async (params) => {
+    const isValid = Joi.object({
+      id: Joi.number().required()
+    }).validate(params);
+
+    if (isValid.error) {
+      throw new HttpError('Invalid parameters.', 400);
+    };
+
+    let beerRating = await this.repository.getOneByCriteria({ beerId: params.id });
+
+    if (!beerRating) {
+      beerRating = await reviewRepository.create({ beerId: params.id });
+    }
+
+    return {
+      rating: beerRating.rating,
+      decremented: false,
+      incremented: false
+    };
+  }
+
+  getBeerRatingFull = async (params) => {
     const isValid = Joi.object({
       id: Joi.number().required(),
       userId: Joi.string()
     }).validate(params);
 
-    if (isValid.error || params.page === 0) {
+    if (isValid.error) {
       throw new HttpError('Invalid parameters.', 400);
     };
 
