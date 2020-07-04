@@ -43,6 +43,15 @@ class ProfileController {
     }
   }
 
+  getProfileData = async (req, res, next) => {
+    try {
+      const profileData = await profileService.getProfileData({ userId: req.userId });
+      res.send(profileData);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   removeBeerFromFavourites = async (req, res, next) => {
     try {
       const user = await profileService.removeBeerFromFavourites({

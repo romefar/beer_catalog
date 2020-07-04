@@ -8,4 +8,5 @@ module.exports = Router()
   .patch('/password', controller.changeProfilePassword)
   .patch('/beer/favourites/:id', controller.addBeerToFavourites)
   .delete('/beer/favourites/:id', controller.removeBeerFromFavourites)
+  .get('/', controller.getProfileData)
   .delete('/', controller.deleteProfile);
