@@ -9,12 +9,14 @@ import { Link } from 'react-router-dom';
 
 const BeerSuggestionsList = ({
   classes, isLoading, hasError, items, favourites,
-  onFavouriteClick, paginationElement, isSuggestAvailable
+  onFavouriteClick, paginationElement, isSuggestAvailable,
+  isYeastSuggestion, isEmpty
 }) => {
   return (
     <div className={classes.container}>
       {isLoading && <LoadingSpinner />}
       {hasError && <MessageBox text={hasError.message} />}
+      {isSuggestAvailable && <h3>Beer suggestions based on your favourites</h3>}
       {items.length > 0 && !isLoading && items.map(beerItem => {
         return (
           <BeerSuggestionsItem
@@ -29,12 +31,13 @@ const BeerSuggestionsList = ({
           />
         );
       })}
-      {!isSuggestAvailable && !isLoading &&
+      {!isSuggestAvailable && !isYeastSuggestion && !isLoading &&
         <MessageBox text="We don't have enough data to suggest you beer. Add some beer to favourites to view suggestions.">
           <Link to="/">
             Disover new beer.
           </Link>
         </MessageBox>}
+      {isEmpty && isYeastSuggestion && <MessageBox text="We didn't find anything. Try different yeast name." />}
       <div className={classes.paginationContainer}>
         {items.length > 0 && paginationElement}
       </div>
@@ -48,6 +51,8 @@ BeerSuggestionsList.propTypes = {
   isSuggestAvailable: PropTypes.bool.isRequired,
   hasError: PropTypes.object,
   items: PropTypes.array.isRequired,
+  isYeastSuggestion: PropTypes.bool.isRequired,
+  isEmpty: PropTypes.bool.isRequired,
   favourites: PropTypes.array.isRequired,
   onFavouriteClick: PropTypes.func.isRequired,
   paginationElement: PropTypes.object.isRequired
