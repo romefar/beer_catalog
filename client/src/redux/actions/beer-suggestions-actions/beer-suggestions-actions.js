@@ -35,6 +35,17 @@ const fetchBeerSuggestions = (page) => async (dispatch) => {
   }
 };
 
+const fetchBeerSuggestionsByYeast = (page, yeast) => async (dispatch) => {
+  try {
+    dispatch(fetchBeerItemsRequest());
+    const beerItems = await getBeerService().fetchBeerSuggestionsByYeast(page, yeast);
+    dispatch(fetchBeerItemsSuccess(beerItems));
+  } catch (error) {
+    dispatch(fetchBeerItemsFailure(error));
+  }
+};
+
 export {
-  fetchBeerSuggestions
+  fetchBeerSuggestions,
+  fetchBeerSuggestionsByYeast
 };
