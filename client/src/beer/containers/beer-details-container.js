@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleBeer } from '../../redux/actions/beer-item-actions/beer-item-actions';
 import { addBeerToFavourites, removeBeerFromFavourites } from '../../redux/actions/profile-actions/profile-actions';
-import { fetchRating, incrementRating, decrementRating } from '../../redux/actions/rating-actions/rating-actions';
+import { fetchRatingValueOnly, fetchRatingFull, incrementRating, decrementRating } from '../../redux/actions/rating-actions/rating-actions';
 import { bindActionCreators } from 'redux';
 import BeerDetails from '../components/beer-details';
 import PropTypes from 'prop-types';
@@ -23,7 +23,11 @@ class BeerDetailsContainer extends Component {
   componentDidMount = () => {
     const { match: { params } } = this.props;
     this.fetchItem({ id: params.beerId });
-    this.props.fetchRating(params.beerId);
+    if (this.props.isLoggedIn) {
+      this.props.fetchRatingFull(params.beerId);
+    } else {
+      this.props.fetchRatingValueOnly(params.beerId);
+    }
   }
 
   onIncrementRatingHandler = () => {
@@ -83,7 +87,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchSingleBeer,
     addBeerToFavourites,
     removeBeerFromFavourites,
-    fetchRating,
+    fetchRatingValueOnly,
+    fetchRatingFull,
     incrementRating,
     decrementRating
   }, dispatch);
@@ -106,7 +111,9 @@ BeerDetailsContainer.propTypes = {
   addBeerToFavourites: PropTypes.func.isRequired,
   fetchRating: PropTypes.func.isRequired,
   incrementRating: PropTypes.func.isRequired,
-  decrementRating: PropTypes.func.isRequired
+  decrementRating: PropTypes.func.isRequired,
+  fetchRatingValueOnly: PropTypes.func.isRequired,
+  fetchRatingFull: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BeerDetailsContainer);
