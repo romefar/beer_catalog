@@ -53,7 +53,7 @@ class CommentForm extends Component {
       const formData = {
         id: this.props.id,
         description: this.state.formData.description.value,
-        creatorId: '5ef76c80f92b1725dc4e8320'
+        creatorId: this.props.userId
       };
       this.props.onSubmit(formData);
       this.setState({
@@ -126,6 +126,7 @@ CommentForm.propTypes = {
   id: PropTypes.number.isRequired,
   classes: PropTypes.object.isRequired,
   hasError: PropTypes.object,
+  userId: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired
 };
 
