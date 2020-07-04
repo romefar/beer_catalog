@@ -9,6 +9,13 @@ const styles = {
       fill: 'white'
     }
   },
+  menuHeaderContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    '& button': {
+      margin: '0 10px 0 0'
+    }
+  },
   headerTitle: {
     fontFamily: 'Bebas Neue, sans-serif',
     fontSize: '3rem',
@@ -16,6 +23,13 @@ const styles = {
       textDecoration: 'none',
       color: 'white'
     }
+  },
+  navDrawer: {
+    height: '100%'
+  },
+  navProfileContainer: {
+    display: 'flex',
+    alignItems: 'center'
   },
   headerNav: {
     display: 'none'

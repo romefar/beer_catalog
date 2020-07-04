@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import styles from './main-navigation-styles';
 import withStyles from 'react-jss';
 import PropTypes from 'prop-types';
@@ -10,24 +10,75 @@ import NavLinks from '../nav-links';
 import { bindActionCreators, compose } from 'redux';
 import ProfilePanel from '../../../../profile/components/profile-panel';
 import { logout } from '../../../../redux/actions/sign-in-actions/sign-in-actions';
+import SideDrawer from '../sidedrawer';
+import Backdrop from '../../ui-elements/backdrop';
 
-const MainNavigation = ({ classes, isLoggedIn, userData, logout }) => {
-  return (
-    <Header>
-      <button className={classes.menuButton}>
-        <MenuIcon />
-      </button>
-      <h1 className={classes.headerTitle}>
-        <Link to="/">
+class MainNavigation extends PureComponent {
+  state = {
+    isDrawerVisible: false
+    // isMobile: false
+  }
+
+  // onResizeHandler = () => {
+  //   if (window.innerWidth <= 768) {
+  //     this.setState({
+  //       isMobile: true
+  //     });
+  //   }
+  // }
+
+  // setResizeHandler = () => {
+  //   window.onresize = this.onResizeHandler;
+  // }
+
+  onCloseDrawerHandler = () => {
+    this.setState({
+      isDrawerVisible: false
+    });
+  }
+
+  onOpenDrawerHandler = () => {
+    this.setState({
+      isDrawerVisible: true
+    });
+  }
+
+  render = () => {
+    const { classes, isLoggedIn, userData, logout } = this.props;
+    const { isDrawerVisible } = this.state;
+    return (
+      <Fragment>
+        { isDrawerVisible && <Backdrop onClick={this.onCloseDrawerHandler}/> }
+        <SideDrawer visible={isDrawerVisible} onClick={this.onCloseDrawerHandler}>
+          <nav className={classes.navDrawer}>
+            <NavLinks isLoggedIn={isLoggedIn}/>
+          </nav>
+        </SideDrawer>
+        <Header>
+          <div className={classes.menuHeaderContainer}>
+            <button
+              className={classes.menuButton}
+              onClick={this.onOpenDrawerHandler}
+            >
+              <MenuIcon />
+            </button>
+            <h1 className={classes.headerTitle}>
+              <Link to="/">
             BEER
-        </Link>
-      </h1>
-      <nav className={classes.headerNav}>
-        <NavLinks isLoggedIn={isLoggedIn}/>
-      </nav>
-      {isLoggedIn && <ProfilePanel userData={userData} logout={logout}/>}
-    </Header>
-  );
+              </Link>
+            </h1>
+          </div>
+          <div className={classes.navProfileContainer}>
+            <nav className={classes.headerNav}>
+              <NavLinks isLoggedIn={isLoggedIn}/>
+            </nav>
+            {isLoggedIn && <ProfilePanel userData={userData} logout={logout}/>}
+          </div>
+
+        </Header>
+      </Fragment>
+    );
+  }
 };
 
 const mapStateToProps = ({

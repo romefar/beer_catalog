@@ -8,7 +8,7 @@ const NavLinks = ({ classes, isLoggedIn }) => {
   return (
     <ul className={classes.navLinksList}>
       <li>
-        <NavLink className={classes.navLinkItem} to="/asd">Beers</NavLink>
+        <NavLink className={classes.navLinkItem} exact to="/">Beers</NavLink>
       </li>
       {isLoggedIn && <li>
         <NavLink

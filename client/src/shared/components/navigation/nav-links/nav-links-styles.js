@@ -37,6 +37,23 @@ const styles = theme => ({
     fontSize: '1rem',
     borderRadius: '5px',
     cursor: 'pointer'
+  },
+  '@media (max-width: 768px)': {
+    navLinksList: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      '& li': {
+        margin: '1.2rem 0'
+      },
+      '& a': {
+        color: 'black'
+      },
+      '& button': {
+        border: '1px solid black',
+        color: 'black',
+        background: 'transparent'
+      }
+    }
   }
 });
 
