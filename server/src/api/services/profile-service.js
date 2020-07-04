@@ -1,5 +1,6 @@
 const profileRepository = require('../data-access-layer/profile-repository');
 const beerRepositry = require('../data-access-layer/beer-repository');
+const commentsRepository = require('../data-access-layer/comments-repository');
 const Joi = require('@hapi/joi');
 const HttpError = require('../../error-models/http-error');
 const fs = require('fs');
@@ -9,6 +10,32 @@ const parseIngredients = require('../../utlis/parseIngredients');
 class ProfileService {
   constructor () {
     this.repository = profileRepository;
+  }
+
+  getProfileData = async (params) => {
+    const isValid = Joi.object({
+      userId: Joi.string().required()
+    }).validate(params);
+
+    if (isValid.error) {
+      throw new HttpError('Invalid body data.', 400);
+    }
+
+    const user = await this.repository.getById(params.userId);
+
+    if (!user) {
+      throw new HttpError('Cannot find a user.', 404);
+    }
+
+    const comments = await commentsRepository.getManyByCriteria({
+      creatorId: params.userId
+    });
+
+    return {
+      ...user.toObject(),
+      favourites: user.favourites.length,
+      comments: comments.length
+    };
   }
 
   updateProfileImage = async (data) => {
