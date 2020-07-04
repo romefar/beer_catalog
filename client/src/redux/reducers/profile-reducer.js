@@ -13,13 +13,18 @@ import {
   PASSWORD_CHANGE_FAILURE,
   DELETE_PROFILE_REQUEST,
   DELETE_PROFILE_SUCCESS,
-  DELETE_PROFILE_FAILURE
+  DELETE_PROFILE_FAILURE,
+  FETCH_PROFILE_DATA_FAILURE,
+  FETCH_PROFILE_DATA_SUCCESS,
+  FETCH_PROFILE_DATA_REQUEST
 } from '../actions/profile-actions/profile-actions-types';
 
 const initialState = {
   favourites: [],
   hasError: null,
-  actionCompletedSuccessfully: false
+  actionCompletedSuccessfully: false,
+  profileData: {},
+  isLoading: false
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -53,11 +58,25 @@ const profileReducer = (state = initialState, action) => {
     case PASSWORD_CHANGE_FAILURE:
     case IMAGE_UPLOAD_FAILURE:
     case DELETE_PROFILE_FAILURE:
+    case FETCH_PROFILE_DATA_FAILURE:
       return {
         ...state,
+        isLoading: false,
         actionCompletedSuccessfully: false,
         hasError: action.payload,
         favourites: []
+      };
+    case FETCH_PROFILE_DATA_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case FETCH_PROFILE_DATA_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        hasError: null,
+        profileData: { ...action.payload }
       };
     default: {
       return state;

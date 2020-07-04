@@ -18,6 +18,9 @@ import {
   SHOW_NEW_COMMENTS,
   DELETE_COMMENT_SUCCESS,
   DELETE_COMMENT_FAILURE
+  // COMMENTS_FILTER_BY_DATE_ASC,
+  // COMMENTS_FILTER_BY_DATE_DESC,
+  // COMMENTS_FILTER_BY_USER_ID
 } from '../actions/comments-actions/comments-actions-types';
 
 const initalState = {
@@ -32,6 +35,11 @@ const initalState = {
   isInitialLoad: true
 };
 
+//
+//
+// TODO: MOVE SORTING TO SELECTORS!!!!!!!!!!!!!!!
+//
+//
 const commentsReducer = (state = initalState, action) => {
   switch (action.type) {
     case SOCKET_CONNECT_REQUEST:
