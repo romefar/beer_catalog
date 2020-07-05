@@ -22,7 +22,7 @@ controller.listen();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../', 'uploads', 'profile-images')));
 app.use(cors({
-  origin: '*',
+  origin: 'https://romefar.github.io',
   methods: 'GET, POST, PATCH, DELETE'
 }));
 
