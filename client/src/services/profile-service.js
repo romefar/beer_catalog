@@ -2,31 +2,31 @@ import fetch from '../utils/fetch';
 
 class ProfileService {
   addBeerToFavourites = async (id) => {
-    return await fetch(`/profile/beer/favourites/${id}`, 'PATCH');
+    return await fetch(`/api/v1/profile/beer/favourites/${id}`, 'PATCH');
   }
 
   getProfileData = async () => {
-    return await fetch('/profile');
+    return await fetch('/api/v1/profile');
   }
 
   getBeerFavouritesList = async () => {
-    return await fetch('/profile/beer/favourites');
+    return await fetch('/api/v1/profile/beer/favourites');
   }
 
   removeBeerFromFavourites = async (id) => {
-    return await fetch(`/profile/beer/favourites/${id}`, 'DELETE');
+    return await fetch(`/api/v1/profile/beer/favourites/${id}`, 'DELETE');
   }
 
   changeProfilePassword = async (formData) => {
-    return await fetch('/profile/password', 'PATCH', formData);
+    return await fetch('/api/v1/profile/password', 'PATCH', formData);
   }
 
   deleteProfile = async () => {
-    return await fetch('/profile', 'DELETE');
+    return await fetch('/api/v1/profile', 'DELETE');
   }
 
   updateProfileImage = async (formData) => {
-    return await fetch('/profile/image/upload', 'POST', formData);
+    return await fetch('/api/v1/profile/image/upload', 'POST', formData);
   }
 }
 

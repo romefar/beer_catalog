@@ -2,15 +2,15 @@ import fetch from '../utils/fetch';
 
 class RatingService {
   getBeerRatingValueOnly = async (id) => {
-    return await fetch(`/rating/beer/${id}/value`);
+    return await fetch(`/api/v1/rating/beer/${id}/value`);
   }
 
   getBeerRatingFull = async (id) => {
-    return await fetch(`/rating/beer/${id}`);
+    return await fetch(`/api/v1/rating/beer/${id}`);
   }
 
   updateBeerRating = async (id, action) => {
-    return await fetch(`/rating/beer/${id}?action=${action}`, 'PATCH');
+    return await fetch(`/api/v1/rating/beer/${id}?action=${action}`, 'PATCH');
   }
 }
 

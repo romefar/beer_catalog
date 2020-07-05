@@ -3,7 +3,7 @@ import ResizeController from '../utils/resize-controller';
 import isEqual from 'lodash.isequal';
 
 class BeerService {
-  #beerRoute = '/beers';
+  #beerRoute = '/api/v1/beers';
   #prevOptions = null;
   #params = {
     per_page: 12,
@@ -71,12 +71,12 @@ class BeerService {
   }
 
   fetchBeerSuggestions = async (page) => {
-    return await fetch(`/beers/suggestions?page=${page}`);
+    return await fetch(`${this.#beerRoute}/suggestions?page=${page}`);
   }
 
   fetchBeerSuggestionsByYeast = async (page, yeast) => {
     const yeastURI = yeast.toLowerCase().split(' ').join('_');
-    return await fetch(`/beers/suggestions?page=${page}&yeast=${yeastURI}`);
+    return await fetch(`${this.#beerRoute}/suggestions?page=${page}&yeast=${yeastURI}`);
   }
 
   fetchBeerItems = async (options) => {
