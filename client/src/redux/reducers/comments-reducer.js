@@ -51,6 +51,7 @@ const commentsReducer = (state = initalState, action) => {
       return {
         ...state,
         items: [...state.items, ...state.newComments],
+        newComments: [],
         hasNewComments: false
       };
     case DATA_LOAD_INITIAL_COMMENTS_REQUEST:
