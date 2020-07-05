@@ -1,16 +1,17 @@
-const styles = {
+const styles = theme => ({
   container: {
     display: 'flex',
     alignItems: 'center',
-    fontFamily: 'Lato, Arial, sans-serif',
+    fontFamily: `Lato, ${theme.defaultFontStack}`,
+    color: theme.textColor,
     justifyContent: 'space-between',
     cursor: 'pointer',
     padding: '3px',
     borderRadius: '10px',
-    transition: 'background-color 0.5s ease-in',
+    transition: 'background-color 0.7s ease-in',
     margin: '5px 0',
     '&:hover': {
-      backgroundColor: 'green'
+      backgroundColor: 'rgba(105,105,105, 0.4)'
     }
   },
   link: {
@@ -30,9 +31,9 @@ const styles = {
   },
   divider: {
     height: '2px',
-    backgroundColor: 'black',
+    backgroundColor: theme.dividerColor,
     borderRadius: '20px'
   }
-};
+});
 
 export default styles;

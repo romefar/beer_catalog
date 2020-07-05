@@ -1,8 +1,9 @@
-const styles = {
+const styles = theme => ({
   container: {
     width: '100%',
     padding: '10px 0',
-    fontFamily: 'Lato, Arial, sans-serif'
+    color: theme.textColor,
+    fontFamily: `Lato, ${theme.defaultFontStack}`
   },
   inputItem: {
     width: '100%',
@@ -10,12 +11,13 @@ const styles = {
     padding: '7px 10px',
     outline: 'none',
     border: '1px solid #ccc',
-    background: 'white',
+    background: theme.defaultBgColor,
     fontFamily: 'inherit',
     borderRadius: '5px',
+    color: theme.textColor,
     transition: 'border-color 0.5s ease-in, background 0.5s ease-in',
     '&:focus': {
-      background: '#f5f5f5'
+      background: theme.inputFocusColor
     }
   },
   inputTextarea: {
@@ -36,6 +38,6 @@ const styles = {
     fontFamily: 'inherit',
     margin: '0 0 8px 0'
   }
-};
+});
 
 export default styles;

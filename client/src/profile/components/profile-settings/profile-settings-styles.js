@@ -1,8 +1,13 @@
-const styles = {
+const styles = theme => ({
   container: {
-    width: '1000px',
+    width: '50vw',
     margin: '20px auto',
-    fontFamily: 'Arial, sans-serif',
+    padding: '25px',
+    borderRadius: '40px',
+    fontFamily: theme.defaultFontStack,
+    backgroundColor: theme.defaultBgColor,
+    color: theme.textColor,
+    transition: 'background-color 0.5s ease-in',
     '& h1': {
       margin: '10px 0'
     },
@@ -17,14 +22,20 @@ const styles = {
     }
   },
   formContainer: {
-    width: '500px'
+    width: '80%',
+    maxWidth: '500px'
   },
   divider: {
     height: '3px',
     backgroundColor: 'rgba(169,169,169, 0.8)',
     borderRadius: '10px',
     margin: '15px 0'
+  },
+  '@media (max-width: 768px)': {
+    container: {
+      width: '80vw'
+    }
   }
-};
+});
 
 export default styles;

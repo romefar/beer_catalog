@@ -68,6 +68,7 @@ class BeerSuggestionsContainer extends PureComponent {
       items, hasError, favourites, isSuggestAvailable,
       isEmpty, isYeastSuggestion, isLoading, pages
     } = this.props;
+
     return (
       <Fragment>
         <BeerSuggestInput

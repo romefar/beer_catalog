@@ -19,7 +19,12 @@ const BeerItem = ({ id, classes, imageUrl, isLoggedIn, name, tagline, favourites
         <p className={classes.tagline}>{tagline}</p>
       </div>
       <div className={classes.actions}>
-        <Button component={RouterLink} to={`/beer/${id}`}>View</Button>
+        <Button
+          component={RouterLink}
+          to={`/beer/${id}`}
+        >
+          View
+        </Button>
         {isLoggedIn &&
         <Button onClick={() => onFavouriteClick(id)}>
           {isFavourite ? 'Remove from favourite' : 'Add to favourite'}

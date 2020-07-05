@@ -1,9 +1,12 @@
-const styles = {
+const styles = theme => ({
   title: {
     display: 'flex',
     alignItems: 'center',
     '& span': {
       margin: '0 8px 0 0'
+    },
+    '& svg': {
+      color: theme.svgIconsColor
     }
   },
   container: {
@@ -19,6 +22,6 @@ const styles = {
     padding: '6px',
     fontWeight: 'bold'
   }
-};
+});
 
 export default styles;

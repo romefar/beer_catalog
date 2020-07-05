@@ -1,8 +1,9 @@
-const styles = {
+const styles = theme => ({
   container: {
-    width: '1000px',
+    width: '50vw',
+    maxWidth: '960px',
     margin: '20px auto',
-    fontFamily: 'Arial, sans-serif',
+    color: theme.textColor,
     '& span': {
       display: 'inline-block'
     },
@@ -14,7 +15,11 @@ const styles = {
     },
     '& p span:first-child': {
       fontWeight: 'bold',
-      margin: '0 7px 0 0'
+      margin: '0 7px 0 0',
+      fontFamily: `Roboto, ${theme.defaultFontStack}`
+    },
+    '& p span:last-child': {
+      fontFamily: theme.defaultFontStack
     }
   },
   info: {
@@ -32,7 +37,22 @@ const styles = {
       width: '100%',
       borderRadius: '50%'
     }
+  },
+  '@media (max-width: 768px)': {
+    container: {
+      width: '80vw',
+      flexWrap: 'wrap'
+    }
+  },
+  '@media (max-width: 560px)': {
+    profileContainer: {
+      flexDirection: 'column',
+      alignItems: 'center'
+    },
+    imageContainer: {
+      margin: 0
+    }
   }
-};
+});
 
 export default styles;

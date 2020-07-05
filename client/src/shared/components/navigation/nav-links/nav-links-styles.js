@@ -46,11 +46,15 @@ const styles = theme => ({
         margin: '1.2rem 0'
       },
       '& a': {
-        color: 'black'
+        color: theme.textColor
+      },
+      '& a.active': {
+        color: theme.textColor,
+        borderBottomColor: theme.textColor
       },
       '& button': {
-        border: '1px solid black',
-        color: 'black',
+        border: `1px solid ${theme.textColor}`,
+        color: theme.textColor,
         background: 'transparent'
       }
     }

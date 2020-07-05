@@ -1,11 +1,12 @@
-const styles = {
+const styles = theme => ({
   container: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
     position: 'relative',
-    color: 'white',
+    color: theme.linkColor,
+    transition: 'background-color 0.5s ease-in',
     '&:hover img': {
       borderColor: 'rgb(169, 112, 255);'
     }
@@ -16,7 +17,7 @@ const styles = {
   },
   userName: {
     margin: '0 7px',
-    fontFamily: 'Lato, Arial, sans-serif'
+    fontFamily: `Lato, ${theme.defaultFontStack}`
   },
   expandIcon: {
     transition: 'transform 0.5s ease-in'
@@ -24,6 +25,6 @@ const styles = {
   expandIconOpened: {
     transform: 'rotate(180deg)'
   }
-};
+});
 
 export default styles;

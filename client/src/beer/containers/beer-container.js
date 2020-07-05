@@ -7,6 +7,7 @@ import { addBeerToFavourites, removeBeerFromFavourites } from '../../redux/actio
 import BeerFilterList from '../components/beer-filter-list';
 import InfiniteScroll from '../../shared/components/infinite-scroll';
 import debounce from 'lodash.debounce';
+import isEqual from 'lodash.isequal';
 import SearchBar from '../../search/search-bar';
 import ExpandPanel from '../../shared/components/expand-panel';
 
@@ -47,16 +48,22 @@ class BeerContainer extends Component {
   }
 
   onFilterChangeHandler = debounce((key, val) => {
-    this.props.beerListCleared();
-    this.setState((state) => {
-      return {
-        filters: {
-          ...state.filters,
-          [key]: val
-        }
-      };
+    const hasChanged = isEqual(this.state.filters, {
+      ...this.state.filters,
+      [key]: val
     });
-  }, 100)
+    if (!hasChanged) {
+      this.props.beerListCleared();
+      this.setState((state) => {
+        return {
+          filters: {
+            ...state.filters,
+            [key]: val
+          }
+        };
+      });
+    }
+  }, 300)
 
   render = () => {
     const { items, hasError, isLoading, isLoggedIn, hasItems, searchQuery, favourites } = this.props;
@@ -68,7 +75,9 @@ class BeerContainer extends Component {
       <Fragment>
         <SearchBar />
         <ExpandPanel>
-          <BeerFilterList onChangeCommitted={this.onFilterChangeHandler} />
+          <BeerFilterList
+            onChangeCommitted={this.onFilterChangeHandler}
+          />
         </ExpandPanel>
         <InfiniteScroll
           fetchItems={this.fetchItems}

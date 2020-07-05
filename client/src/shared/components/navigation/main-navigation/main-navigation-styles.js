@@ -1,4 +1,9 @@
-const styles = {
+const styles = theme => ({
+  '@global': {
+    body: {
+      background: theme.bgColor
+    }
+  },
   menuButton: {
     background: 'transparent',
     width: '3rem',
@@ -17,11 +22,11 @@ const styles = {
     }
   },
   headerTitle: {
-    fontFamily: 'Bebas Neue, sans-serif',
+    fontFamily: `Bebas Neue, ${theme.defaultFontStack}`,
     fontSize: '3rem',
     '& a': {
       textDecoration: 'none',
-      color: 'white'
+      color: theme.linkColor
     }
   },
   navDrawer: {
@@ -42,6 +47,6 @@ const styles = {
       display: 'block'
     }
   }
-};
+});
 
 export default styles;

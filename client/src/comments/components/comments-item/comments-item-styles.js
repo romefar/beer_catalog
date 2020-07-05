@@ -1,7 +1,23 @@
-const styles = {
+const styles = theme => ({
   commentItem: {
     display: 'flex',
-    margin: '0 0 20px 0'
+    margin: '0 0 20px 0',
+    color: theme.textColor,
+    transition: 'background-color 0.5s ease-in'
+  },
+  stampInfo: {
+    '& span': {
+      display: 'block'
+    },
+    '& span:last-child': {
+      color: '#808080',
+      fontSize: '0.8rem',
+      margin: '0 0 7px 0'
+    },
+    '& span:first-child': {
+      fontWeight: 'bold',
+      fontFamily: `Roboto, ${theme.defaultFontStack}`
+    }
   },
   imageContainer: {
     width: '100px',
@@ -24,8 +40,8 @@ const styles = {
   },
   info: {
     width: '100%',
-    fontFamily: 'Arial, sans-serif'
+    fontFamily: theme.defaultFontStack
   }
-};
+});
 
 export default styles;

@@ -1,4 +1,4 @@
-const styles = {
+const styles = theme => ({
   sideDrawer: {
     position: 'fixed',
     left: 0,
@@ -6,7 +6,7 @@ const styles = {
     zIndex: '100',
     height: '100vh',
     width: '70%',
-    background: '#dbdbdb',
+    background: theme.defaultBgColor,
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.26)'
   },
   slideInLeftEnter: {
@@ -26,6 +26,6 @@ const styles = {
     opacity: 0,
     transition: 'all 200ms'
   }
-};
+});
 
 export default styles;

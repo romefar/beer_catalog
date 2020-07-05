@@ -1,6 +1,10 @@
 import React, { PureComponent, createRef } from 'react';
 import withStyles from 'react-jss';
 import styles from './settings-dropdown-styles';
+import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
+import { DARK_THEME, LIGHT_THEME } from '../../../utils/constants/theme-constants';
+import { changeTheme } from '../../../redux/actions/theme-actions/theme-actions';
 import PropTypes from 'prop-types';
 import SettingsDropdownItem from '../settings-dropdown-item';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
@@ -8,12 +12,9 @@ import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import AccountBoxOutlinedIcon from '@material-ui/icons/AccountBoxOutlined';
 import NightsStayOutlinedIcon from '@material-ui/icons/NightsStayOutlined';
 import Switch from '@material-ui/core/Switch';
+import getThemeService from '../../../services/theme-service';
 
 class SettingsDropdown extends PureComponent {
-  state = {
-    themeCheckbox: false
-  }
-
   node = createRef()
 
   componentDidMount = () => {
@@ -32,15 +33,14 @@ class SettingsDropdown extends PureComponent {
   }
 
   onChangeHandler = (e) => {
-    const name = e.target.name;
-    this.setState(state => {
-      return {
-        [name]: !state[name]
-      };
-    });
+    const checked = e.target.checked;
+    const theme = checked ? DARK_THEME : LIGHT_THEME;
+    this.props.changeTheme(theme);
+    getThemeService().saveTheme(theme);
   }
 
   render = () => {
+    const { themeName } = this.props;
     return (
       <div
         className={this.props.classes.container}
@@ -63,7 +63,7 @@ class SettingsDropdown extends PureComponent {
           title="Dark mode"
           controlElement={
             <Switch
-              checked={this.state.themeCheckbox}
+              checked={themeName === DARK_THEME}
               onChange={this.onChangeHandler}
               name="themeCheckbox"
               color="primary" />}
@@ -78,11 +78,30 @@ class SettingsDropdown extends PureComponent {
   }
 };
 
+const mapStateToProps = ({
+  theme: { themeName }
+}) => {
+  return {
+    themeName
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    changeTheme
+  }, dispatch);
+};
+
 SettingsDropdown.propTypes = {
   classes: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   containerNodeRef: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  themeName: PropTypes.string.isRequired,
+  changeTheme: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(SettingsDropdown);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles)
+)(SettingsDropdown);

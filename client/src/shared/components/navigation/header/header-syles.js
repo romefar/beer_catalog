@@ -1,12 +1,21 @@
-const styles = {
+const styles = theme => ({
   header: {
     height: '60px',
-    backgroundColor: 'rgba(0,0,0,0.9)',
+    backgroundColor: theme.headerColor,
+    padding: '0 10px',
+    color: theme.textColor,
+    '& h1': {
+      margin: 0
+    }
+  },
+  container: {
+    maxWidth: '1900px',
+    height: '60px',
     display: 'flex',
     alignItems: 'center',
-    padding: '0 10px',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    margin: '0 auto'
   }
-};
+});
 
 export default styles;

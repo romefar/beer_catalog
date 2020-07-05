@@ -1,4 +1,4 @@
-const styles = {
+const styles = theme => ({
   filtersContainer: {
     width: '100%',
     margin: '0 auto',
@@ -8,6 +8,6 @@ const styles = {
       textAlign: 'center'
     }
   }
-};
+});
 
 export default styles;

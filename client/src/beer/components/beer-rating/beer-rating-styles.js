@@ -1,8 +1,9 @@
-const styles = {
+const styles = theme => ({
   container: {
     display: 'flex',
     alignItems: 'center',
-    fontFamily: 'Arial, sans-serif',
+    color: theme.textColor,
+    fontFamily: theme.defaultFontStack,
     fontWeight: 'bold',
     fontSize: '1.1rem',
     '& h2': {
@@ -16,6 +17,6 @@ const styles = {
     color: 'red',
     margin: 0
   }
-};
+});
 
 export default styles;

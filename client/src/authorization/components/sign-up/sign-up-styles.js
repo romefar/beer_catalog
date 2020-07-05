@@ -1,12 +1,14 @@
-const styles = {
+const styles = theme => ({
   container: {
-    width: '30vw',
+    width: '576px',
+    color: theme.textColor,
     margin: '0 auto',
-    fontFamily: 'Lato, Arial, sans-serif'
+    fontFamily: `Lato, ${theme.defaultFontStack}`
   },
   signUpForm: {
     width: '100%',
-    border: '1px solid black',
+    border: `1px solid ${theme.formBorderColor}`,
+    backgroundColor: theme.defaultBgColor,
     borderRadius: '5px',
     padding: '20px',
     margin: '50px 0'
@@ -39,7 +41,12 @@ const styles = {
     textDecoration: 'none',
     fontFamily: 'inherit',
     color: '#1273eb'
+  },
+  '@media (max-width: 768px)': {
+    container: {
+      width: '80vw'
+    }
   }
-};
+});
 
 export default styles;

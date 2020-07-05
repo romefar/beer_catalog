@@ -109,7 +109,6 @@ BeerDetailsContainer.propTypes = {
   fetchSingleBeer: PropTypes.func.isRequired,
   removeBeerFromFavourites: PropTypes.func.isRequired,
   addBeerToFavourites: PropTypes.func.isRequired,
-  fetchRating: PropTypes.func.isRequired,
   incrementRating: PropTypes.func.isRequired,
   decrementRating: PropTypes.func.isRequired,
   fetchRatingValueOnly: PropTypes.func.isRequired,

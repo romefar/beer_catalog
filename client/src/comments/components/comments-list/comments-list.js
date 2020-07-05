@@ -8,15 +8,15 @@ import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import Modal from '../../../shared/components/ui-elements/modal';
+import { Link } from 'react-router-dom';
 // import CommentsFilter from '../comments-filter';
 
 const CommentsList = (props) => {
-  let {
+  const {
     classes, hasError, items, isLoading, isLoggedIn, userData, hasNewComments, isModalVisible,
     onUpdateClick, closeModalHandler, showModalHandler, deleteCommentHandler
     // onSelectChangeHandler
   } = props;
-  items = items.sort((item1, item2) => new Date(item1.createdAt) < new Date(item2.createdAt));
   return (
     <div className={classes.container}>
       <Modal
@@ -78,6 +78,18 @@ const CommentsList = (props) => {
           );
         })
       }
+      {!hasError && !isLoggedIn && items.length === 0 &&
+      <div className={classes.linkContainer}>
+        <Link
+          to="/signin"
+          className={classes.link}>
+            Login to be able to comment.
+        </Link>
+      </div>}
+      {!hasError && isLoggedIn && items.length === 0 &&
+      <div className={classes.linkContainer}>
+         Be the first one to comment!
+      </div>}
     </div>
   );
 };

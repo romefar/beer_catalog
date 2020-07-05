@@ -1,4 +1,4 @@
-const styles = {
+const styles = theme => ({
   imageUploadPreview: {
     width: '13rem',
     height: '13rem',
@@ -9,8 +9,8 @@ const styles = {
     textAlign: 'center',
     marginBottom: '1rem',
     color: 'white',
-    fontFamily: 'Arial, sans-serif',
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    fontFamily: theme.defaultFontStack,
+    backgroundColor: theme.imagePreviewBgColor,
     '& img': {
       width: '100%',
       borderRadius: '50%',
@@ -23,6 +23,6 @@ const styles = {
       margin: '0 10px 10px 0'
     }
   }
-};
+});
 
 export default styles;

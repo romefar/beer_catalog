@@ -1,4 +1,4 @@
-const styles = {
+const styles = theme => ({
   imageContainer: {
     width: '100%',
     height: '200px',
@@ -17,19 +17,23 @@ const styles = {
     margin: 0,
     whiteSpace: 'nowrap',
     overflow: 'hidden',
+    color: theme.textColor,
     textOverflow: 'ellipsis',
-    fontFamily: 'Helvetica, Arial, sans-serif'
+    fontFamily: `Helvetica, ${theme.defaultFontStack}`
   },
   tagline: {
     margin: '10px 0',
-    fontFamily: 'Verdana, Arial, sans-serif',
+    fontFamily: `Verdana, ${theme.defaultFontStack}`,
     color: '#696969'
   },
   actions: {
     borderTop: '1px solid #ccc',
     display: 'flex',
     justifyContent: 'space-evenly',
-    padding: '5px 0 0 0'
+    padding: '5px 0 0 0'.defaultFontStack,
+    '& span': {
+      color: theme.buttonTextColor
+    }
   },
   cardContent: {
     width: '320px',
@@ -37,9 +41,9 @@ const styles = {
     transition: 'all 0.5s ease-in',
     '&:hover': {
       transform: 'scale(1.05)',
-      border: '1px solid black'
+      border: `1px solid ${theme.textColor}`
     }
   }
-};
+});
 
 export default styles;

@@ -1,4 +1,4 @@
-const styles = {
+const styles = theme => ({
   '@keyframes ldio-g8djpgziqln': {
     from: { transform: 'translate(-50%,-50%) rotate(0deg)' },
     to: { transform: 'translate(-50%,-50%) rotate(360deg)' }
@@ -7,7 +7,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     overflow: 'hidden',
-    background: '#ffffff',
+    background: 'transparent',
     width: '100%'
   },
   'ldio-g8djpgziqln': {
@@ -22,7 +22,7 @@ const styles = {
     '& div': {
       width: '70px',
       height: '70px',
-      border: '10px solid #ec2431',
+      border: `10px solid ${theme.spinnerColor}`,
       borderTopColor: 'transparent',
       borderRadius: '50%',
       animation: '$ldio-g8djpgziqln 1s linear infinite'
@@ -40,6 +40,6 @@ const styles = {
     alignItems: 'center',
     zIndex: 100
   }
-};
+});
 
 export default styles;

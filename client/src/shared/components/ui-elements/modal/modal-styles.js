@@ -1,12 +1,13 @@
-const styles = {
+const styles = theme => ({
   modal: {
     zIndex: '100',
     position: 'fixed',
+    color: theme.textColor,
     top: '22vh',
     left: '10%',
     fontFamily: 'Open Sans, sans-serif',
     width: '80%',
-    background: 'white',
+    background: theme.bgColor,
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.26)',
     borderRadius: '8px'
   },
@@ -54,6 +55,6 @@ const styles = {
     opacity: 0,
     transition: 'all 200ms'
   }
-};
+});
 
 export default styles;

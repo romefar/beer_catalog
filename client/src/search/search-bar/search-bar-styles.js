@@ -1,7 +1,11 @@
-const styles = {
+const styles = theme => ({
   inputContainer: {
     width: '40vw',
-    margin: '0 auto'
+    maxWidth: '768px',
+    margin: '0 auto',
+    '& svg': {
+      color: theme.svgIconsColor
+    }
   },
   searchForm: {
     width: '100%',
@@ -11,11 +15,13 @@ const styles = {
     justifyContent: 'center'
   },
   inputField: {
-    fontFamily: 'Lato, Arial, sans-serif',
+    fontFamily: `Lato, ${theme.defaultFontStack}`,
     padding: '10px',
     fontSize: '1rem',
     outline: 'none',
+    color: theme.textColor,
     width: '90%',
+    background: theme.inputFocusColor,
     border: '1px solid #ccc',
     borderRadius: '5px',
     margin: '0 3px 0 0',
@@ -29,7 +35,12 @@ const styles = {
     '&:hover, &:focus': {
       borderColor: 'red'
     }
+  },
+  '@media (max-width: 968px)': {
+    inputContainer: {
+      width: '70vw'
+    }
   }
-};
+});
 
 export default styles;

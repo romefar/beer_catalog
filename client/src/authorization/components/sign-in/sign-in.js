@@ -128,7 +128,7 @@ class SignIn extends Component {
           </Button>
           <span className={classes.linkContainer}>
             <Link
-              to="/signin"
+              to="/signup"
               className={classes.link}>
               Not a member? Sign up
             </Link>

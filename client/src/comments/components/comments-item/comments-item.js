@@ -16,8 +16,10 @@ const CommentsItem = (props) => {
         <img src={`http://localhost:5000/${imageUrl}`} alt={userName} title={userName}/>
       </div>
       <div className={classes.info}>
-        <span className={classes.userName}>{userName}</span>
-        <span>{createdAt}</span>
+        <div className={classes.stampInfo}>
+          <span className={classes.userName}>{userName}</span>
+          <span>{createdAt}</span>
+        </div>
         <p className={classes.comment}>{comment}</p>
         {isLoggedIn && userData.userId === creatorId &&
            <div className={classes.actions}>

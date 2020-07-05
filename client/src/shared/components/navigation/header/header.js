@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
 const Header = ({ classes, children }) => {
   return (
     <header id="main_header"className={classes.header}>
-      {children}
+      <div className={classes.container}>
+        {children}
+      </div>
     </header>
   );
 };
