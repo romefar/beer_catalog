@@ -1,0 +1,40 @@
+export default {
+  LIGHT_THEME: {
+    linkColor: 'white',
+    headerColor: 'rgba(0,0,0,0.9)',
+    bgColor: '#f6f8fa',
+    defaultBgColor: '#fff',
+    textColor: 'black',
+    defaultFontStack: 'Arial, sans-serif',
+    spinnerColor: '#696969',
+    profilePanelBgColor: '#f9f9f9',
+    dividerColor: 'black',
+    buttonTextColor: 'rgba(0, 0, 0, 0.87)',
+    imagePreviewBgColor: 'rgba(0, 0, 0, 0.8)',
+    listItemHoveredColor: '#f5f5f5',
+    svgIconsColor: 'rgba(0, 0, 0, 0.54)',
+    formBorderColor: 'black',
+    inputFocusColor: '#fff',
+    pageItemHoveredColor: 'rgba(0, 0, 0, 0.12)',
+    pageItemSelectedColor: 'rgba(0, 0, 0, 0.04)'
+  },
+  DARK_THEME: {
+    linkColor: 'white',
+    headerColor: 'rgba(0,0,0,0.9)',
+    bgColor: '#0D0D0D',
+    buttonTextColor: '#efeff1',
+    defaultBgColor: '#0e0e10',
+    textColor: 'white',
+    defaultFontStack: 'Arial, sans-serif',
+    spinnerColor: '#0084FF',
+    profilePanelBgColor: '#18181b',
+    dividerColor: 'black',
+    imagePreviewBgColor: 'rgba(0, 0, 0, 0.4)',
+    listItemHoveredColor: '#18181b',
+    svgIconsColor: 'rgba(255, 255, 255, 0.54)',
+    formBorderColor: 'white',
+    inputFocusColor: '#3a3a3d',
+    pageItemHoveredColor: 'rgba(255, 255, 255, 0.12)',
+    pageItemSelectedColor: 'rgba(255, 255, 255, 0.58)'
+  }
+};
