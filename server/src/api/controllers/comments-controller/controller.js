@@ -1,3 +1,4 @@
+const logger = require('../../../config/winston');
 const commentsService = require('../../services/comments-service');
 const CONNECTION = 'connection';
 const DISCONNECTION = 'disconnect';
@@ -16,6 +17,7 @@ class CommentsController {
       const comments = await commentsService.getInitialComments(id);
       cb(comments.comments);
     } catch (error) {
+      logger.error(`[SOCKET] Cannot load initial comments. - ${error.message}`);
       // eslint-disable-next-line standard/no-callback-literal
       cb({ error: error.message });
     }
@@ -26,6 +28,7 @@ class CommentsController {
       await commentsService.deleteComment(data.commentId, data.beerId);
       cb(data.commentId);
     } catch (error) {
+      logger.error(`[SOCKET] Cannot delete comment. - ${error.message}`);
       // eslint-disable-next-line standard/no-callback-literal
       cb({ error: error.message });
     }
@@ -38,6 +41,7 @@ class CommentsController {
       cb({});
       this.io.emit(BROADCAST_NEW_COMMENT, comment);
     } catch (error) {
+      logger.error(`[SOCKET] Cannot get new comments. - ${error.message}`);
       // eslint-disable-next-line standard/no-callback-literal
       cb({ error: error.message });
     }
@@ -45,15 +49,14 @@ class CommentsController {
 
   listen = () => {
     this.io.on(CONNECTION, (socket) => {
-      console.log('a user is connected ' + socket.id);
-
+      logger.info(`[SOCKET] Client ${socket.id} has connected. `);
       this.socket = socket;
 
       socket.on(SEND_MESSAGE, this.addNewComment);
       socket.on(GET_INITIAL_COMMENTS, this.getInitialComments);
       socket.on(DELETE_COMMENT, this.deleteComment);
       socket.on(DISCONNECTION, () => {
-        console.log('a user is disconnected ' + socket.id);
+        logger.info(`[SOCKET] Client ${socket.id} has disconnected. `);
       });
     });
   }

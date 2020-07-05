@@ -58,7 +58,6 @@ class RatingService {
   }
 
   changeBeerRating = async (params) => {
-    console.log(params);
     const isValid = Joi.object({
       id: Joi.number().required(),
       userId: Joi.string().required(),
@@ -74,7 +73,6 @@ class RatingService {
     const beerRating = await this.repository.getOneByCriteria({ beerId: id });
     const incremented = beerRating.likes.includes(userId);
     const decremented = beerRating.dislikes.includes(userId);
-    console.log(`Decremented: ${decremented} Incremented ${incremented}`);
     let options;
     // TOOD: Refactor
     if (action === 'inc') {
