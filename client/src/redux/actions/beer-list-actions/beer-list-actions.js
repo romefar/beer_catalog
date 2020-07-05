@@ -40,7 +40,6 @@ const fetchBeerItems = (options) => async (dispatch) => {
     const beerItems = await getBeerService().fetchBeerItems(options);
     dispatch(beerItemsLoaded(beerItems));
   } catch (error) {
-    console.log(error);
     dispatch(beerItemsLoadingFailed(error));
   }
 };

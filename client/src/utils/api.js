@@ -3,5 +3,5 @@ import hostHelper from './hostHelper';
 
 export default axios.create({
   baseURL: hostHelper(),
-  timeout: 5000
+  timeout: 9000
 });

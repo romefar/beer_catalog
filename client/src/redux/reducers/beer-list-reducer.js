@@ -30,7 +30,7 @@ const beerReducer = (state = initialState, action) => {
       return {
         items: [],
         isLoading: false,
-        hasEror: action.payload,
+        hasError: action.payload,
         hasItems: true
       };
     case BEER_LIST_CLEARED:

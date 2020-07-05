@@ -38,7 +38,7 @@ class ProfilePanel extends PureComponent {
           <span className={classes.userName}>{userData.userName}</span>
           <div className={classes.profileImage}>
             <Avatar
-              imageUrl={`${hostHelper}/${userData.image}`}
+              imageUrl={`${hostHelper()}/${userData.image}`}
               alt="title"
             />
           </div>

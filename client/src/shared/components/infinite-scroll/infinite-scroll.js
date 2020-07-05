@@ -49,7 +49,7 @@ class InfiniteScroll extends Component {
           onFavouriteClick={onFavouriteClick}
         />
         {isLoading && hasItems && <LoadingSpinner />}
-        {hasError && <MessageBox text='Something went wrong.' />}
+        {hasError && <MessageBox text={hasError.message} />}
         {!hasItems && <MessageBox text='Sorry. We are out of beer.' />}
       </Fragment>
     );
