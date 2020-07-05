@@ -9,6 +9,7 @@ import beerFavouritesReducer from './beer-favourites-reducer';
 import commentsReducer from './comments-reducer';
 import ratingReducer from './rating-reducer';
 import beerSuggestionsReducer from './beer-suggestions-reducer';
+import themeReducer from './theme-reducer';
 
 export default combineReducers({
   beerList: beerReducer,
@@ -20,5 +21,6 @@ export default combineReducers({
   signIn: signInReducer,
   signUp: signUpReducer,
   rating: ratingReducer,
-  beerSuggestions: beerSuggestionsReducer
+  beerSuggestions: beerSuggestionsReducer,
+  theme: themeReducer
 });
