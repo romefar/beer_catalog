@@ -1,5 +1,5 @@
 import React, { Component, Suspense, lazy } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
@@ -13,6 +13,7 @@ import getAuthService from '../services/auth-service';
 import PrivateRoute from '../shared/components/routing/private-route';
 import themes from '../shared/themes/themes';
 import getThemeService from '../services/theme-service';
+import MessageBox from '../shared/components/ui-elements/message-box';
 
 import styles from './app-styles';
 
@@ -63,6 +64,13 @@ class App extends Component {
             <Route path="/beer/:beerId" component={BeerDetailsContainer} />
             {!isLoggedIn && <Route path="/signup" component={SignUpContainer} />}
             {!isLoggedIn && <Route path="/signin" component={SignInContainer} />}
+            <Route component={() => (
+              <MessageBox text="404 Page is not found.">
+                <Link to="/">
+                  Visit home page
+                </Link>
+              </MessageBox>
+            )} />
           </Switch>
         </Suspense>
       </ThemeProvider>
