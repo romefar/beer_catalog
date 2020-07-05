@@ -7,8 +7,8 @@ import socketService from '../../services/socket-service';
 const store = createStore(
   reducers,
   compose(
-    applyMiddleware(thunk, socketMiddleware(socketService)),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(thunk, socketMiddleware(socketService))
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 
