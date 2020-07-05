@@ -10,8 +10,8 @@
     "static/js/3.677adffe.chunk.js.map": "/beer_catalog/static/js/3.677adffe.chunk.js.map",
     "main.js": "/beer_catalog/static/js/main.8fa1ca3a.chunk.js",
     "main.js.map": "/beer_catalog/static/js/main.8fa1ca3a.chunk.js.map",
-    "runtime-main.js": "/beer_catalog/static/js/runtime-main.873ccbe9.js",
-    "runtime-main.js.map": "/beer_catalog/static/js/runtime-main.873ccbe9.js.map",
+    "runtime-main.js": "/beer_catalog/static/js/runtime-main.44219df8.js",
+    "runtime-main.js.map": "/beer_catalog/static/js/runtime-main.44219df8.js.map",
     "static/js/6.7b9d33f3.chunk.js": "/beer_catalog/static/js/6.7b9d33f3.chunk.js",
     "static/js/6.7b9d33f3.chunk.js.map": "/beer_catalog/static/js/6.7b9d33f3.chunk.js.map",
     "static/js/7.f518f07f.chunk.js": "/beer_catalog/static/js/7.f518f07f.chunk.js",
@@ -28,8 +28,8 @@
     "static/js/12.57fa93de.chunk.js.map": "/beer_catalog/static/js/12.57fa93de.chunk.js.map",
     "static/js/13.63c7d04a.chunk.js": "/beer_catalog/static/js/13.63c7d04a.chunk.js",
     "static/js/13.63c7d04a.chunk.js.map": "/beer_catalog/static/js/13.63c7d04a.chunk.js.map",
-    "static/js/14.73fa529b.chunk.js": "/beer_catalog/static/js/14.73fa529b.chunk.js",
-    "static/js/14.73fa529b.chunk.js.map": "/beer_catalog/static/js/14.73fa529b.chunk.js.map",
+    "static/js/14.1de1ab76.chunk.js": "/beer_catalog/static/js/14.1de1ab76.chunk.js",
+    "static/js/14.1de1ab76.chunk.js.map": "/beer_catalog/static/js/14.1de1ab76.chunk.js.map",
     "static/js/15.01a46794.chunk.js": "/beer_catalog/static/js/15.01a46794.chunk.js",
     "static/js/15.01a46794.chunk.js.map": "/beer_catalog/static/js/15.01a46794.chunk.js.map",
     "static/js/16.674bd6ca.chunk.js": "/beer_catalog/static/js/16.674bd6ca.chunk.js",
@@ -37,7 +37,7 @@
     "static/js/17.6b2230e4.chunk.js": "/beer_catalog/static/js/17.6b2230e4.chunk.js",
     "static/js/17.6b2230e4.chunk.js.map": "/beer_catalog/static/js/17.6b2230e4.chunk.js.map",
     "index.html": "/beer_catalog/index.html",
-    "precache-manifest.57e61bf83904576a0eaaa134e04811de.js": "/beer_catalog/precache-manifest.57e61bf83904576a0eaaa134e04811de.js",
+    "precache-manifest.6ed0500cc16c15ad3787af337a7dd5a7.js": "/beer_catalog/precache-manifest.6ed0500cc16c15ad3787af337a7dd5a7.js",
     "service-worker.js": "/beer_catalog/service-worker.js",
     "static/js/2.63c88984.chunk.js.LICENSE.txt": "/beer_catalog/static/js/2.63c88984.chunk.js.LICENSE.txt",
     "static/js/6.7b9d33f3.chunk.js.LICENSE.txt": "/beer_catalog/static/js/6.7b9d33f3.chunk.js.LICENSE.txt",
@@ -46,7 +46,7 @@
     "static/media/star.c0036473.svg": "/beer_catalog/static/media/star.c0036473.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.873ccbe9.js",
+    "static/js/runtime-main.44219df8.js",
     "static/js/6.7b9d33f3.chunk.js",
     "static/js/main.8fa1ca3a.chunk.js"
   ]

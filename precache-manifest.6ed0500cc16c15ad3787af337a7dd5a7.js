@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c2e506efbf63ce0d08798e4712cd657a",
+    "revision": "82e0194129c616d59d07b1ce9afa4493",
     "url": "/beer_catalog/index.html"
   },
   {
@@ -28,8 +28,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beer_catalog/static/js/13.63c7d04a.chunk.js"
   },
   {
-    "revision": "49c13f2a5ad83752435a",
-    "url": "/beer_catalog/static/js/14.73fa529b.chunk.js"
+    "revision": "6c7b045f146d0f65a27d",
+    "url": "/beer_catalog/static/js/14.1de1ab76.chunk.js"
   },
   {
     "revision": "17c11bdb2e192592aee8",
@@ -84,8 +84,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beer_catalog/static/js/main.8fa1ca3a.chunk.js"
   },
   {
-    "revision": "8f225cad9f7fda8cb3c9",
-    "url": "/beer_catalog/static/js/runtime-main.873ccbe9.js"
+    "revision": "018764730f1eed76e19a",
+    "url": "/beer_catalog/static/js/runtime-main.44219df8.js"
   },
   {
     "revision": "e246ed5e63e280bc872029a1a358cf29",
