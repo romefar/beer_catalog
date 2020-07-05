@@ -9,8 +9,10 @@ class ResizeController {
                             header.offsetHeight;
     const cardWidth = 320;
     const cardHeight = 353;
-
-    const elememtsInRow = Math.floor(containerWidth / cardWidth);
+    let elememtsInRow = Math.floor(containerWidth / cardWidth);
+    if (elememtsInRow === 0) {
+      elememtsInRow = 1;
+    }
     let rowsCount = 0;
     let rowsHeight = 0;
     while (rowsHeight < containerHeight) {
