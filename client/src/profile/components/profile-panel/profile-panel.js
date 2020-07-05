@@ -6,6 +6,7 @@ import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
 import Avatar from '../../../shared/components/ui-elements/avatar';
 import SettingsDropdown from '../settings-dropdown';
 import clsx from 'clsx';
+import hostHelper from '../../../utils/hostHelper';
 
 class ProfilePanel extends PureComponent {
   state = {
@@ -37,7 +38,7 @@ class ProfilePanel extends PureComponent {
           <span className={classes.userName}>{userData.userName}</span>
           <div className={classes.profileImage}>
             <Avatar
-              imageUrl={`http://localhost:5000/${userData.image}`}
+              imageUrl={`${hostHelper}/${userData.image}`}
               alt="title"
             />
           </div>

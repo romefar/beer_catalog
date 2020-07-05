@@ -6,6 +6,7 @@ import LoadingSpinner from '../../../shared/components/ui-elements/loading-spinn
 import MessageBox from '../../../shared/components/ui-elements/message-box';
 import dateFormatter from '../../../utils/dateFormatter';
 import PropTypes from 'prop-types';
+import hostHelper from '../../../utils/hostHelper';
 
 const ProfileDetails = (props) => {
   const { classes, isLoading, hasError, profileData } = props;
@@ -16,7 +17,7 @@ const ProfileDetails = (props) => {
       {!isLoading && !hasError &&
         <Card className={classes.profileContainer}>
           <div className={classes.imageContainer}>
-            <img src={`http://localhost:5000/${profileData.image}`} alt={profileData.name} title={profileData.name}/>
+            <img src={`${hostHelper()}/${profileData.image}`} alt={profileData.name} title={profileData.name}/>
           </div>
           <div className={classes.info}>
             <p>

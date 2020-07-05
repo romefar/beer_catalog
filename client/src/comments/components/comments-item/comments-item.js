@@ -6,6 +6,7 @@ import dateFormatter from '../../../utils/dateFormatter';
 import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import hostHelper from '../../../utils/hostHelper';
 
 const CommentsItem = (props) => {
   const { id, classes, imageUrl, userName, isLoggedIn, comment, pubDate, userData, creatorId, showModalHandler } = props;
@@ -13,7 +14,7 @@ const CommentsItem = (props) => {
   return (
     <Card className={classes.commentItem}>
       <div className={classes.imageContainer}>
-        <img src={`http://localhost:5000/${imageUrl}`} alt={userName} title={userName}/>
+        <img src={`${hostHelper()}/${imageUrl}`} alt={userName} title={userName}/>
       </div>
       <div className={classes.info}>
         <div className={classes.stampInfo}>

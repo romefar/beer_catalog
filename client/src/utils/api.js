@@ -1,6 +1,7 @@
 import axios from 'axios';
+import hostHelper from './hostHelper';
 
 export default axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: hostHelper(),
   timeout: 5000
 });

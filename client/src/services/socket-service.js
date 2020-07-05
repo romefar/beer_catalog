@@ -1,6 +1,7 @@
 import io from 'socket.io-client';
+import hostHelper from '../utils/hostHelper';
 
-const host = 'http://localhost:5000';
+const host = hostHelper();
 
 class SocketService {
   #socket;
