@@ -18,12 +18,12 @@ class InfiniteScroll extends Component {
           this.props.fetchItems(this.props.options);
         }
       }
-      // const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      // if (isMobile && windowInnerHeight + window.pageYOffset >= documentOffsetHeight - 20) {
-      //   if (!this.props.isLoading && !this.props.isEnd) {
-      //     // this.props.fetchItems();
-      //   }
-      // }
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile && windowInnerHeight + window.pageYOffset >= documentOffsetHeight - 20) {
+        if (!this.props.isLoading && this.props.hasItems) {
+          this.props.fetchItems(this.props.options);
+        }
+      }
     }, 100);
   }
 
