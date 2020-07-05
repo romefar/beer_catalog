@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "82e0194129c616d59d07b1ce9afa4493",
+    "revision": "deed14752708ac648d42b9e61f6f6e42",
     "url": "/beer_catalog/index.html"
   },
   {
@@ -20,24 +20,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beer_catalog/static/js/11.dfdfeac7.chunk.js"
   },
   {
-    "revision": "bf7659ce9a7a4a9d29dd",
-    "url": "/beer_catalog/static/js/12.57fa93de.chunk.js"
+    "revision": "bd90d69a23af6243f867",
+    "url": "/beer_catalog/static/js/12.f2e0a687.chunk.js"
   },
   {
     "revision": "12df5df794e0ac06c0e4",
     "url": "/beer_catalog/static/js/13.63c7d04a.chunk.js"
   },
   {
-    "revision": "6c7b045f146d0f65a27d",
-    "url": "/beer_catalog/static/js/14.1de1ab76.chunk.js"
+    "revision": "c42416e6b68ac3564e60",
+    "url": "/beer_catalog/static/js/14.26b547d5.chunk.js"
   },
   {
     "revision": "17c11bdb2e192592aee8",
     "url": "/beer_catalog/static/js/15.01a46794.chunk.js"
   },
   {
-    "revision": "b5d9a6d71f784b523840",
-    "url": "/beer_catalog/static/js/16.674bd6ca.chunk.js"
+    "revision": "3f98a8f41feaa4b186a0",
+    "url": "/beer_catalog/static/js/16.2a7b83a0.chunk.js"
   },
   {
     "revision": "90f575a5ca7292f367ec",
@@ -64,8 +64,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beer_catalog/static/js/6.7b9d33f3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3a47d6d8e9cd3200a455",
-    "url": "/beer_catalog/static/js/7.f518f07f.chunk.js"
+    "revision": "65beed83c4b00684909d",
+    "url": "/beer_catalog/static/js/7.fb26573a.chunk.js"
   },
   {
     "revision": "6305c2d72b9f45de4327",
@@ -84,8 +84,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beer_catalog/static/js/main.8fa1ca3a.chunk.js"
   },
   {
-    "revision": "018764730f1eed76e19a",
-    "url": "/beer_catalog/static/js/runtime-main.44219df8.js"
+    "revision": "6718f3761d194484350d",
+    "url": "/beer_catalog/static/js/runtime-main.f201cee7.js"
   },
   {
     "revision": "e246ed5e63e280bc872029a1a358cf29",
