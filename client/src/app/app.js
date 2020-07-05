@@ -1,28 +1,29 @@
 import React, { Component, Suspense, lazy } from 'react';
-import styles from './app-styles';
-import MainNavigation from '../shared/components/navigation/main-navigation';
 import { Route, Switch } from 'react-router-dom';
-import withStyles, { ThemeProvider } from 'react-jss';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
-import BeerContainer from '../beer/containers/beer-container';
-import BeerDetailsContainer from '../beer/containers/beer-details-container';
-import SignUpContainer from '../authorization/containers/sign-up-container';
-import SignInContainer from '../authorization/containers/sign-in-container';
-import ProfileContainer from '../profile/containers/profile-container';
-import ProflieDetailsContainer from '../profile/containers/profile-details-container';
-import BeerSuggestionsContainer from '../suggestions/containers/beer-suggestions-container';
-import FavouritesContainer from '../favourites/containers/favourites-container';
+import PropTypes from 'prop-types';
+import withStyles, { ThemeProvider } from 'react-jss';
+import LoadingSpinner from '../shared/components/ui-elements/loading-spinner';
 import { logout, signInSuccess } from '../redux/actions/sign-in-actions/sign-in-actions';
 import { fetchBeerFavouritesIds } from '../redux/actions/profile-actions/profile-actions';
 import { changeTheme } from '../redux/actions/theme-actions/theme-actions';
-import PropTypes from 'prop-types';
+import MainNavigation from '../shared/components/navigation/main-navigation';
 import getAuthService from '../services/auth-service';
 import PrivateRoute from '../shared/components/routing/private-route';
 import themes from '../shared/themes/themes';
 import getThemeService from '../services/theme-service';
 
-// const BeerContainer = lazy(() => import('./routes/Home'));
+import styles from './app-styles';
+
+const BeerContainer = lazy(() => import('../beer/containers/beer-container'));
+const BeerDetailsContainer = lazy(() => import('../beer/containers/beer-details-container'));
+const SignUpContainer = lazy(() => import('../authorization/containers/sign-up-container'));
+const SignInContainer = lazy(() => import('../authorization/containers/sign-in-container'));
+const ProfileContainer = lazy(() => import('../profile/containers/profile-container'));
+const ProflieDetailsContainer = lazy(() => import('../profile/containers/profile-details-container'));
+const BeerSuggestionsContainer = lazy(() => import('../suggestions/containers/beer-suggestions-container'));
+const FavouritesContainer = lazy(() => import('../favourites/containers/favourites-container'));
 
 class App extends Component {
   componentDidUpdate = (prevProps) => {
@@ -50,16 +51,20 @@ class App extends Component {
     return (
       <ThemeProvider theme={themes[themeName]}>
         <MainNavigation />
-        <Switch>
-          <Route path="/" component={BeerContainer} exact />
-          <PrivateRoute path="/beer/favourites" component={FavouritesContainer} exact/>
-          <PrivateRoute path="/profile/settings" component={ProfileContainer} exact/>
-          <PrivateRoute path="/suggestions" component={BeerSuggestionsContainer} exact/>
-          <PrivateRoute path="/profile" component={ProflieDetailsContainer} exact/>
-          <Route path="/beer/:beerId" component={BeerDetailsContainer} />
-          {!isLoggedIn && <Route path="/signup" component={SignUpContainer} />}
-          {!isLoggedIn && <Route path="/signin" component={SignInContainer} />}
-        </Switch>
+        <Suspense
+          fallback={<LoadingSpinner />}
+        >
+          <Switch>
+            <Route path="/" component={BeerContainer} exact />
+            <PrivateRoute path="/beer/favourites" component={FavouritesContainer} exact/>
+            <PrivateRoute path="/profile/settings" component={ProfileContainer} exact/>
+            <PrivateRoute path="/suggestions" component={BeerSuggestionsContainer} exact/>
+            <PrivateRoute path="/profile" component={ProflieDetailsContainer} exact/>
+            <Route path="/beer/:beerId" component={BeerDetailsContainer} />
+            {!isLoggedIn && <Route path="/signup" component={SignUpContainer} />}
+            {!isLoggedIn && <Route path="/signin" component={SignInContainer} />}
+          </Switch>
+        </Suspense>
       </ThemeProvider>
     );
   }
