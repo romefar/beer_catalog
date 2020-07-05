@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import styles from './app-styles';
 import MainNavigation from '../shared/components/navigation/main-navigation';
 import { Route, Switch } from 'react-router-dom';
@@ -15,19 +15,19 @@ import BeerSuggestionsContainer from '../suggestions/containers/beer-suggestions
 import FavouritesContainer from '../favourites/containers/favourites-container';
 import { logout, signInSuccess } from '../redux/actions/sign-in-actions/sign-in-actions';
 import { fetchBeerFavouritesIds } from '../redux/actions/profile-actions/profile-actions';
+import { changeTheme } from '../redux/actions/theme-actions/theme-actions';
 import PropTypes from 'prop-types';
 import getAuthService from '../services/auth-service';
 import PrivateRoute from '../shared/components/routing/private-route';
+import themes from '../shared/themes/themes';
+import getThemeService from '../services/theme-service';
 
-const theme = {
-  linkColor: 'white'
-};
+// const BeerContainer = lazy(() => import('./routes/Home'));
 
 class App extends Component {
   componentDidUpdate = (prevProps) => {
     const isTimerSettled = getAuthService().isTimerSettled();
     if (this.props.isLoggedIn && !isTimerSettled) {
-      console.log(`Timer : ${isTimerSettled} && IsLoggedIn ${this.props.isLoggedIn}`);
       getAuthService().setLogoutTimer(this.props.userData.expiration, this.props.logout);
       this.props.fetchBeerFavouritesIds();
     }
@@ -35,6 +35,7 @@ class App extends Component {
 
   componentDidMount = () => {
     getAuthService().checkSignIn(this.props.signInSuccess);
+    getThemeService().checkTheme(this.props.changeTheme);
     if (this.props.isLoggedIn) {
       this.props.fetchBeerFavouritesIds();
     }
@@ -45,9 +46,9 @@ class App extends Component {
   }
 
   render = () => {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, themeName } = this.props;
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={themes[themeName]}>
         <MainNavigation />
         <Switch>
           <Route path="/" component={BeerContainer} exact />
@@ -65,11 +66,13 @@ class App extends Component {
 };
 
 const mapStateToProps = ({
-  signIn: { isLoggedIn, userData }
+  signIn: { isLoggedIn, userData },
+  theme: { themeName }
 }) => {
   return {
     isLoggedIn,
-    userData
+    userData,
+    themeName
   };
 };
 
@@ -77,7 +80,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     logout,
     signInSuccess,
-    fetchBeerFavouritesIds
+    fetchBeerFavouritesIds,
+    changeTheme
   }, dispatch);
 };
 
@@ -86,7 +90,9 @@ App.propTypes = {
   userData: PropTypes.object,
   logout: PropTypes.func.isRequired,
   signInSuccess: PropTypes.func.isRequired,
-  fetchBeerFavouritesIds: PropTypes.func.isRequired
+  themeName: PropTypes.string.isRequired,
+  fetchBeerFavouritesIds: PropTypes.func.isRequired,
+  changeTheme: PropTypes.func.isRequired
 };
 
 export default compose(

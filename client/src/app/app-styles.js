@@ -1,17 +1,16 @@
 const styles = {
   '@global': {
     body: {
-      margin: 0
-      // color: '#e9e9e9'
+      margin: 0,
+      transition: 'background-color 0.5s ease-in'
     },
     '*': {
       boxSizing: 'border-box'
-    }
-  },
-  starSVG: {
-    fill: 'red',
-    '& path:first-child': {
-      fill: 'blue'
+    },
+    '@media (max-width: 768px)': {
+      html: {
+        fontSize: '14px'
+      }
     }
   }
 };
