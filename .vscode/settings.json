@@ -1,0 +1,10 @@
+{
+  "cSpell.words": [
+    "DEVTOOLS",
+    "persistor"
+  ],
+  "eslint.workingDirectories": [
+    "./client",
+    "./server"
+  ],
+}
