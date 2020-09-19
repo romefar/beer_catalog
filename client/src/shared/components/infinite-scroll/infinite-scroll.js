@@ -19,7 +19,7 @@ class InfiniteScroll extends Component {
         }
       }
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      if (isMobile && windowInnerHeight + window.pageYOffset >= documentOffsetHeight - 20) {
+      if (isMobile && windowInnerHeight + window.pageYOffset >= documentOffsetHeight - 50) {
         if (!this.props.isLoading && this.props.hasItems) {
           this.props.fetchItems(this.props.options);
         }
