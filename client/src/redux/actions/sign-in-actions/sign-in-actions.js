@@ -2,9 +2,11 @@ import getAuthService from '../../../services/auth-service';
 import {
   SIGNIN_SUCCESS,
   SIGNIN_FAILURE,
+  SIGNIN_RESET,
   UPDATE_SIGNIN_IMAGE,
   LOGOUT
 } from './sign-in-actions-types';
+import { clearTheme } from '../theme-actions/theme-actions';
 
 const signInSubmit = (formData, history) => async (dispatch) => {
   try {
@@ -33,6 +35,12 @@ const signInSuccess = (authData, history) => {
   };
 };
 
+const signInReset = () => {
+  return {
+    type: SIGNIN_RESET
+  };
+};
+
 const signInFailed = (error) => {
   return {
     type: SIGNIN_FAILURE,
@@ -40,17 +48,19 @@ const signInFailed = (error) => {
   };
 };
 
-const logout = () => {
+const logout = () => async (dispatch) => {
   getAuthService().clearLogoutTimer();
   getAuthService().clearAuthData();
-  return {
+  dispatch(clearTheme());
+  dispatch({
     type: LOGOUT
-  };
+  });
 };
 
 export {
   signInSubmit,
   signInSuccess,
+  signInReset,
   updateSignInImage,
   logout
 };

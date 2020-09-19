@@ -1,5 +1,6 @@
 export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
 export const SIGNIN_FAILURE = 'SIGNIN_FAILURE';
 export const SIGNIN_SUBMIT = 'SIGNIN_SUBMIT';
+export const SIGNIN_RESET = 'SIGNIN_RESET';
 export const UPDATE_SIGNIN_IMAGE = 'UPDATE_SIGNIN_IMAGE';
 export const LOGOUT = 'LOGOUT';

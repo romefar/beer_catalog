@@ -1,6 +1,7 @@
 import {
   SIGNIN_SUCCESS,
   SIGNIN_FAILURE,
+  SIGNIN_RESET,
   UPDATE_SIGNIN_IMAGE,
   LOGOUT
 } from '../actions/sign-in-actions/sign-in-actions-types';
@@ -29,6 +30,7 @@ const signInReducer = (state = initialState, action) => {
         ...state,
         userData: { ...state.userData, image: action.payload }
       };
+    case SIGNIN_RESET:
     case LOGOUT:
       return {
         isLoggedIn: false,
