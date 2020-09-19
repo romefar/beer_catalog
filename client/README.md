@@ -1,13 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Beer catalog front-end
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+The front-end part of the beer catalog. Built with React/Redux. The front-end part is hoisted on github pages.
 
-### `npm start`
+### Start
 
-Runs the app in the development mode.<br />
+To start the app use `npm start` command.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
