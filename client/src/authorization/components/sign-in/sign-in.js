@@ -57,6 +57,10 @@ class SignIn extends Component {
     }
   }
 
+  componentWillUnmount = () => {
+    this.props.signInReset();
+  }
+
   onChangeHandler = (e, inputName) => {
     const value = e.target.value;
     const preValidators = this.state.formData[inputName].preValidators;
@@ -143,6 +147,7 @@ SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   hasError: PropTypes.object,
+  signInReset: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired
 };

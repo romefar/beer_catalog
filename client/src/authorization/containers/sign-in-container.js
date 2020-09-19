@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { signInSubmit } from '../../redux/actions/sign-in-actions/sign-in-actions';
+import { signInSubmit, signInReset } from '../../redux/actions/sign-in-actions/sign-in-actions';
 import SignIn from '../components/sign-in';
 
 class SignInContainer extends Component {
   render = () => {
-    const { hasError, isLoggedIn, signInSubmit, history } = this.props;
+    const { hasError, isLoggedIn, signInSubmit, signInReset, history } = this.props;
     return (
       <SignIn
         hasError={hasError}
         isLoggedIn={isLoggedIn}
+        signInReset={signInReset}
         onSubmit={signInSubmit}
         history={history}
       />
@@ -29,7 +30,8 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    signInSubmit
+    signInSubmit,
+    signInReset
   }, dispatch);
 };
 
