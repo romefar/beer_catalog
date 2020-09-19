@@ -6,4 +6,4 @@ Beer catalog is a full stack web application developed for the wide range of use
 
 View deployment: https://romefar.github.io/beer_catalog/
 
-Provided by https://punkapi.com/.
+Provided by [Punk API](https://punkapi.com/).
