@@ -3,6 +3,7 @@
 ## Description
 
 The front-end part of the beer catalog. Built with React/Redux. The front-end part is hoisted on github pages.
+Created with `create-react-app`.
 
 ### Start
 
